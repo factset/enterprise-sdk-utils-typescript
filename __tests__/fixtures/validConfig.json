@@ -1,0 +1,22 @@
+{
+    "name": "name",
+    "clientId": "clientId",
+    "clientAuthType": "clientAuthType",
+    "owners": [
+        "owner_id"
+    ],
+    "jwk": {
+        "kty": "RSA",
+        "use": "sig",
+        "alg": "RS256",
+        "kid": "jwk_kid",
+        "d": "d",
+        "n": "n",
+        "e": "e",
+        "p": "p",
+        "q": "q",
+        "dp": "dp",
+        "dq": "dq",
+        "qi": "qi"
+    }
+}

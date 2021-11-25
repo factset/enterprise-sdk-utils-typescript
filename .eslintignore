@@ -1,0 +1,5 @@
+lib/
+node_modules/
+jest.config.js
+__tests__/fixtures
+.github
