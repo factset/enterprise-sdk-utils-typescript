@@ -2,7 +2,7 @@
 
 # FactSet SDK Utilities for TypeScript and JavaScript
 
-![npm](https://img.shields.io/npm/v/@fds/sdk-utils)
+![npm](https://img.shields.io/npm/v/@factset/sdk-utils)
 [![Apache-2 license](https://img.shields.io/badge/license-Apache2-brightgreen.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
 This repository contains a collection of utilities that supports FactSet's SDK in TypeScript and JavaScript, and facilitate usage of FactSet APIs.
@@ -12,13 +12,13 @@ This repository contains a collection of utilities that supports FactSet's SDK i
 ### npm
 
 ```sh
-npm install @fds/sdk-utils
+npm install @factset/sdk-utils
 ```
 
 ### yarn
 
 ```sh
-yarn add @fds/sdk-utils
+yarn add @factset/sdk-utils
 ```
 
 ## Usage
@@ -33,7 +33,7 @@ First, you need to create the OAuth 2.0 client configuration that will be used t
 2. When prompted, download the configuration file and move it to your development environment.
 
 ```ts
-import { ConfidentialClient } from '@fds/sdk-utils';
+import { ConfidentialClient } from '@factset/sdk-utils';
 import axios from 'axios';
 
 async function exampleRequest() {
