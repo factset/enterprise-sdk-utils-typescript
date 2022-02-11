@@ -1,24 +1,12 @@
 import joi from 'joi';
+import * as jose from 'jose';
 import { ConfigurationError } from './errors';
 import { FACTSET_WELL_KNOWN_URI, PACKAGE_NAME } from './constants';
 import { readFileSync } from 'fs';
 import debugModule from 'debug';
 const debug = debugModule(`${PACKAGE_NAME}:configuration`);
 
-export type ConfidentialClientJwk = {
-  kty: string;
-  use: string;
-  alg: string;
-  kid: string;
-  d: string;
-  n: string;
-  e: string;
-  p: string;
-  q: string;
-  dp: string;
-  dq: string;
-  qi: string;
-};
+export type ConfidentialClientJwk = jose.JWK;
 
 export type ConfidentialClientConfiguration = {
   name: string;

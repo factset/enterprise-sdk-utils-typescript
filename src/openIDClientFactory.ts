@@ -1,5 +1,4 @@
 import { ConfidentialClientConfiguration, WellKnownURIError } from '.';
-import * as jose from 'jose';
 import { Client, Issuer, ClientAuthMethod } from 'openid-client';
 import debugModule from 'debug';
 import { PACKAGE_NAME } from './constants';
@@ -9,7 +8,7 @@ export class OpenIDClientFactory {
   public static async getClient(config: ConfidentialClientConfiguration): Promise<Client> {
     const jwks = {
       keys: [config.jwk],
-    } as jose.JSONWebKeySet;
+    };
 
     const clientAuthMethod: ClientAuthMethod = 'private_key_jwt';
 
