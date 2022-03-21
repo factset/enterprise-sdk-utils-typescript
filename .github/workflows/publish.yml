@@ -1,0 +1,34 @@
+name: Publish
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+    name: Deploy to package index
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Setup .npmrc
+        run: |
+          cat <<- 'EOF' > .npmrc
+            @factset:registry=https://${{ secrets.NPM_PUBLISH_URL }}
+            //${{ secrets.NPM_PUBLISH_URL }}:_authToken=${{ secrets.NPM_AUTH_TOKEN }}
+            always-auth = true
+          EOF
+
+      - name: Install dependencies
+        run: |
+          yarn install
+
+      - name: Publish
+        run: |
+          yarn publish --access public
