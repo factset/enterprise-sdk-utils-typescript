@@ -16,5 +16,5 @@ jobs:
     steps:
       - uses: naveenk1223/action-pr-title@v1.0.0
         with:
-          regex: '^(ENSC-\d+ )?(chore|demo|deprecate|docs|feat|fix|perf|refactor|revert|style|test)(\(.+\))?: .+$'
-          max_length: 80
+          regex: '^(chore|demo|deprecate|docs|feat|fix|perf|refactor|revert|style|test)(\(.+\))?: .+$'
+          max_length: 60
