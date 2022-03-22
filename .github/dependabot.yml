@@ -4,6 +4,11 @@ updates:
     directory: '/'
     schedule:
       interval: daily
+    versioning-strategy: increase
+    commit-message:
+      prefix: fix
+      prefix-development: chore
+      include: scope
   - package-ecosystem: github-actions
     directory: '/'
     schedule:
