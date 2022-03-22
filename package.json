@@ -27,7 +27,7 @@
     "CONTRIBUTING.md"
   ],
   "dependencies": {
-    "debug": "^4.3.2",
+    "debug": "^4.3.4",
     "joi": "^17.4.2",
     "jose": "^4.0.0",
     "openid-client": "^5.0.0"
