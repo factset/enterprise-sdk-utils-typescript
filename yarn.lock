@@ -2391,10 +2391,10 @@ joi@^17.6.0:
     "@sideway/formula" "^3.0.0"
     "@sideway/pinpoint" "^2.0.0"
 
-jose@^4.1.4, jose@^4.8.0:
-  version "4.8.0"
-  resolved "https://registry.npmjs.org/jose/-/jose-4.8.0.tgz#470c4c045f2abc899b924872aecb000c28947288"
-  integrity sha512-XmcX4PdqRlfDCSn9UPAvGoVylQxuJxtCZNlX4U0KgmOSHUvxYCalgnU/JNdNJQ20mGth3+xrPSkFj9rxS9tYWQ==
+jose@^4.1.4, jose@^4.8.1:
+  version "4.8.1"
+  resolved "https://registry.npmjs.org/jose/-/jose-4.8.1.tgz#dc7c2660b115ba29b44880e588c5ac313c158247"
+  integrity sha512-+/hpTbRcCw9YC0TOfN1W47pej4a9lRmltdOVdRLz5FP5UvUq3CenhXjQK7u/8NdMIIShMXYAh9VLPhc7TjhvFw==
 
 js-tokens@^4.0.0:
   version "4.0.0"
