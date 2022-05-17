@@ -7,7 +7,7 @@
 
 This repository contains a collection of utilities that supports FactSet's SDK in TypeScript and JavaScript, and facilitate usage of FactSet APIs.
 
-## Installations
+## Installation
 
 ### npm
 
@@ -29,7 +29,7 @@ This library contains multiple modules, sample usage of each module is below.
 
 First, you need to create the OAuth 2.0 client configuration that will be used to authenticate against FactSet's APIs:
 
-1. Create a [new application](https://developer.factset.com/applications) on FactSet's Developer Portal.
+1. [Create a new application](https://developer.factset.com/learn/authentication-oauth2#creating-an-application) on FactSet's Developer Portal.
 2. When prompted, download the configuration file and move it to your development environment.
 
 ```ts
