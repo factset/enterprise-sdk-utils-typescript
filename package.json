@@ -29,7 +29,7 @@
   "dependencies": {
     "debug": "^4.3.4",
     "joi": "^17.6.0",
-    "jose": "^4.8.3",
+    "jose": "^4.9.0",
     "openid-client": "^5.1.8"
   },
   "devDependencies": {
@@ -38,7 +38,7 @@
     "@types/node": "^18.0.1",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",
-    "eslint": "^8.19.0",
+    "eslint": "^8.22.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "jest": "^27.5.1",
