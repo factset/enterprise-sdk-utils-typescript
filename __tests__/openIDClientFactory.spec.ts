@@ -1,5 +1,4 @@
 import { OpenIDClientFactory } from '../src/openIDClientFactory';
-import { mocked } from 'ts-jest/utils';
 import { Client, Issuer } from 'openid-client';
 
 jest.mock('openid-client');
@@ -29,7 +28,7 @@ const config = {
 describe('Test OpenIDClientFactory class', () => {
   describe('Test getClient function', () => {
     test('should not throw an error', async () => {
-      mocked(Issuer.discover).mockResolvedValue({
+      jest.mocked(Issuer.discover).mockResolvedValue({
         metadata: {
           issuer: 'test',
           token_endpoint: 'token_endpint',
@@ -47,7 +46,7 @@ describe('Test OpenIDClientFactory class', () => {
     });
 
     test('should throw an error while retrieving contents from well known uri', async () => {
-      mocked(Issuer.discover).mockRejectedValue('test_error');
+      jest.mocked(Issuer.discover).mockRejectedValue('test_error');
 
       await expect(OpenIDClientFactory.getClient(config)).rejects.toThrow(
         'Error retrieving contents from the well_known_uri: testWellKnownUri',
