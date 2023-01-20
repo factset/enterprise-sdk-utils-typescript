@@ -2547,11 +2547,9 @@ json-stable-stringify-without-jsonify@^1.0.1:
   integrity sha1-nbe1lJatPzz+8wp1FC0tkwrXJlE=
 
 json5@2.x, json5@^2.1.2:
-  version "2.2.0"
-  resolved "https://registry.npmjs.org/json5/-/json5-2.2.0.tgz#2dfefe720c6ba525d9ebd909950f0515316c89a3"
-  integrity sha512-f+8cldu7X/y7RAJurMEJmdoKXGB/X550w2Nr3tTbezL6RwEE/iMcm+tZnXeoZtKuOq6ft8+CqzEkrIgx1fPoQA==
-  dependencies:
-    minimist "^1.2.5"
+  version "2.2.3"
+  resolved "https://registry.npmjs.org/json5/-/json5-2.2.3.tgz#78cd6f1a19bdc12b73db5ad0c61efd66c1e29283"
+  integrity sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==
 
 kleur@^3.0.3:
   version "3.0.3"
@@ -2681,11 +2679,6 @@ minimatch@^3.0.4, minimatch@^3.0.5, minimatch@^3.1.2:
   dependencies:
     brace-expansion "^1.1.7"
 
-minimist@^1.2.5:
-  version "1.2.6"
-  resolved "https://registry.npmjs.org/minimist/-/minimist-1.2.6.tgz#8637a5b759ea0d6e98702cfb3a9283323c93af44"
-  integrity sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==
-
 ms@2.1.2:
   version "2.1.2"
   resolved "https://registry.npmjs.org/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
@@ -2752,10 +2745,10 @@ onetime@^5.1.2:
   dependencies:
     mimic-fn "^2.1.0"
 
-openid-client@^5.3.0:
-  version "5.3.0"
-  resolved "https://registry.npmjs.org/openid-client/-/openid-client-5.3.0.tgz#e0fa433bb7a156b09d8cbb100abe95b322aa42be"
-  integrity sha512-SykPCeZBZ/SxiBH5AWynvFUIDX3//2pgwc/3265alUmGHeCN03+X8uP+pHOVnCXCKfX/XOhO90qttAQ76XcGxA==
+openid-client@^5.3.2:
+  version "5.3.2"
+  resolved "https://registry.npmjs.org/openid-client/-/openid-client-5.3.2.tgz#fcc2c16f9681fa5f03ee0581b0935f88fc49f11f"
+  integrity sha512-nXXt+cna0XHOw+WqjMZOmuXw/YZEMwfWD2lD7tCsFtsBjMQGVXA+NZABA3upYBET1suhIsmfd7GnxG4jCAnvYQ==
   dependencies:
     jose "^4.10.0"
     lru-cache "^6.0.0"
@@ -2905,10 +2898,10 @@ prettier-linter-helpers@^1.0.0:
   dependencies:
     fast-diff "^1.1.2"
 
-prettier@^2.8.0:
-  version "2.8.0"
-  resolved "https://registry.npmjs.org/prettier/-/prettier-2.8.0.tgz#c7df58393c9ba77d6fba3921ae01faf994fb9dc9"
-  integrity sha512-9Lmg8hTFZKG0Asr/kW9Bp8tJjRVluO8EJQVfY2T7FMw9T5jy4I/Uvx0Rca/XWf50QQ1/SS48+6IJWnrb+2yemA==
+prettier@^2.8.3:
+  version "2.8.3"
+  resolved "https://registry.npmjs.org/prettier/-/prettier-2.8.3.tgz#ab697b1d3dd46fb4626fbe2f543afe0cc98d8632"
+  integrity sha512-tJ/oJ4amDihPoufT5sM0Z1SKEuKay8LfVAMlbbhnnkvt6BUserZylqo2PN+p9KeljLr0OHa2rXHU1T8reeoTrw==
 
 pretty-format@^27.0.0, pretty-format@^27.5.1:
   version "27.5.1"
