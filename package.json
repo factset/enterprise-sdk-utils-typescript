@@ -28,7 +28,7 @@
   ],
   "dependencies": {
     "debug": "^4.3.4",
-    "joi": "^17.7.0",
+    "joi": "^17.7.1",
     "jose": "^4.11.4",
     "openid-client": "^5.4.0"
   },
