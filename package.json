@@ -30,7 +30,7 @@
     "debug": "^4.3.4",
     "jose": "^4.14.1",
     "joi": "^17.9.1",
-    "openid-client": "^5.4.0"
+    "openid-client": "^5.4.2"
   },
   "devDependencies": {
     "@types/debug": "^4.1.7",
