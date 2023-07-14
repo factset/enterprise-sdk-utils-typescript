@@ -1,5 +1,5 @@
 import { Client } from 'openid-client';
-import { mocked } from 'ts-jest/utils';
+import { mocked } from 'jest-mock';
 import { ConfidentialClient } from '../src';
 import { OpenIDClientFactory } from '../src/openIDClientFactory';
 jest.mock('../src/openIDClientFactory');
@@ -21,7 +21,7 @@ describe('test ConfidentialClient class', () => {
 
   describe('test getAccessToken function', () => {
     test('check access token logic', async () => {
-      jest.useFakeTimers('modern');
+      jest.useFakeTimers();
 
       const mockGrant = jest.fn().mockImplementation(() => {
         const date = Math.floor(Date.now() / 1000);

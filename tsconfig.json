@@ -5,18 +5,13 @@
     "module": "commonjs",
     "rootDir": "./src",
     "declaration": true,
-    "outDir": "./lib",
+    "outDir": "./dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
   },
-  "exclude": [
-    "lib",
-    "__tests__"
-  ],
-  "include": [
-    "src"
-  ]
+  "exclude": ["dist", "__tests__"],
+  "include": ["src"],
 }
