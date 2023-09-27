@@ -33,7 +33,7 @@
     "openid-client": "^5.5.0"
   },
   "devDependencies": {
-    "@types/debug": "^4.1.8",
+    "@types/debug": "^4.1.9",
     "@types/jest": "^27.4.1",
     "@types/node": "^20.7.0",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
