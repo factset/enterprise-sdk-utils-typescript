@@ -10,7 +10,7 @@ describe('test Token Class', () => {
   });
 
   test('checks the token whether it is expired or not', () => {
-    jest.useFakeTimers('modern');
+    jest.useFakeTimers();
     const expiresAt = Math.floor(new Date('2020-01-02').getTime() / 1000);
     const token = new Token('testtoken', expiresAt);
 

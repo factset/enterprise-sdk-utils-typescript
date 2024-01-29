@@ -1,5 +1,5 @@
 import { OpenIDClientFactory } from '../src/openIDClientFactory';
-import { mocked } from 'ts-jest/utils';
+import { mocked } from 'jest-mock';
 import { Client, Issuer } from 'openid-client';
 
 jest.mock('openid-client');
