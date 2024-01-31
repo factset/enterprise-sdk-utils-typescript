@@ -2798,10 +2798,10 @@ onetime@^5.1.2:
   dependencies:
     mimic-fn "^2.1.0"
 
-openid-client@^5.6.2:
-  version "5.6.2"
-  resolved "https://registry.npmjs.org/openid-client/-/openid-client-5.6.2.tgz#ec6a9135d7eadfd4692d43c4f2fa0b1be3a0badf"
-  integrity sha512-TIVimoK/fAvpiISLcoGZyNJx2TOfd5AE6TXn58FFj6Y8qbU/jqky54Aws7sYKuCph1bLPWSRUa1r/Rd6K21bhg==
+openid-client@^5.6.4:
+  version "5.6.4"
+  resolved "https://registry.npmjs.org/openid-client/-/openid-client-5.6.4.tgz#b2c25e6d5338ba3ce00e04341bb286798a196177"
+  integrity sha512-T1h3B10BRPKfcObdBklX639tVz+xh34O7GjofqrqiAQdm7eHsQ00ih18x6wuJ/E6FxdtS2u3FmUGPDeEcMwzNA==
   dependencies:
     jose "^4.15.4"
     lru-cache "^6.0.0"
