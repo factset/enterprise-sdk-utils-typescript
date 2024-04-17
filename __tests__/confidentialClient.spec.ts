@@ -5,8 +5,8 @@ import { OpenIDClientFactory } from '../src/openIDClientFactory';
 
 jest.mock('../src/openIDClientFactory');
 
-jest.mock('https-proxy-agent',() => {
-  return jest.fn().mockImplementation(function(this: { proxy: string }) {
+jest.mock('https-proxy-agent', () => {
+  return jest.fn().mockImplementation(function (this: { proxy: string }) {
     this.proxy = 'http://proxy.example.com:8080';
   });
 });
@@ -84,15 +84,15 @@ describe('test ConfidentialClient class', () => {
       await expect(confidentialClient.getAccessToken()).rejects.toThrow('Error attempting to get access token');
     });
 
-    test('should use the proxy agent if provided',async () => {
+    test('should use the proxy agent if provided', async () => {
       const proxyUrl = 'http://proxy.example.com:8080';
       mocked(OpenIDClientFactory.getClient).mockResolvedValue({
-        grant:jest.fn().mockResolvedValue({
-          access_token:'test_token',
+        grant: jest.fn().mockResolvedValue({
+          access_token: 'test_token',
         }),
       } as unknown as Client);
 
-      const confidentialClient = new ConfidentialClient('./__tests__/fixtures/validConfig.json',{ proxy:proxyUrl });
+      const confidentialClient = new ConfidentialClient('./__tests__/fixtures/validConfig.json', { proxy: proxyUrl });
 
       await expect(confidentialClient.getAccessToken()).resolves.toBe('test_token');
     });

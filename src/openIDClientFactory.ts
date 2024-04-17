@@ -1,5 +1,5 @@
-import { ConfidentialClientConfiguration,WellKnownURIError } from '.';
-import { Client,ClientAuthMethod,custom,Issuer } from 'openid-client';
+import { ConfidentialClientConfiguration, WellKnownURIError } from '.';
+import { Client, ClientAuthMethod, custom, Issuer } from 'openid-client';
 import debugModule from 'debug';
 import { PACKAGE_NAME } from './constants';
 import { Agent } from 'node:http';
@@ -7,14 +7,14 @@ import { Agent } from 'node:http';
 const debug = debugModule(`${PACKAGE_NAME}:OpenIDClientFactory`);
 
 export class OpenIDClientFactory {
-  public static async getClient(config: ConfidentialClientConfiguration,proxyAgent?: Agent): Promise<Client> {
+  public static async getClient(config: ConfidentialClientConfiguration, proxyAgent?: Agent): Promise<Client> {
     const jwks = {
       keys: [config.jwk],
     };
 
     if (proxyAgent) {
       custom.setHttpOptionsDefaults({
-        agent:proxyAgent,
+        agent: proxyAgent,
       });
     }
 
