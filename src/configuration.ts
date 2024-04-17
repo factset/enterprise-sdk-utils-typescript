@@ -1,9 +1,10 @@
 import joi from 'joi';
 import * as jose from 'jose';
 import { ConfigurationError } from './errors';
-import { FACTSET_WELL_KNOWN_URI, PACKAGE_NAME } from './constants';
+import { FACTSET_WELL_KNOWN_URI,PACKAGE_NAME } from './constants';
 import { readFileSync } from 'fs';
 import debugModule from 'debug';
+
 const debug = debugModule(`${PACKAGE_NAME}:configuration`);
 
 export type ConfidentialClientJwk = jose.JWK;
@@ -12,9 +13,7 @@ export type ConfidentialClientConfiguration = {
   name: string;
   clientId: string;
   clientAuthType: string;
-  owners: Array<string>;
-  wellKnownUri: string;
-  jwk: ConfidentialClientJwk;
+  owners: Array<string>;wellKnownUri: string;jwk: ConfidentialClientJwk;proxy?: string;
 };
 
 const schema = joi.object({

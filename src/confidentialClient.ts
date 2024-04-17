@@ -1,10 +1,12 @@
-import { Token, AccessTokenError, ConfidentialClientConfiguration, OAuth2Client } from '.';
+import { AccessTokenError,ConfidentialClientConfiguration,OAuth2Client,Token } from '.';
 import { OpenIDClientFactory } from './openIDClientFactory';
 import { Configuration } from './configuration';
 import { Client } from 'openid-client';
-import { PACKAGE_NAME, JWT_NOT_BEFORE_SECS, JWT_EXPIRE_AFTER_SECS } from './constants';
+import { JWT_EXPIRE_AFTER_SECS,JWT_NOT_BEFORE_SECS,PACKAGE_NAME } from './constants';
 import { unixTimestamp } from './unixTimestamp';
 import debugModule from 'debug';
+import HttpsProxyAgent from 'https-proxy-agent';
+
 const debug = debugModule(`${PACKAGE_NAME}:ConfidentialClient`);
 
 /**
@@ -22,8 +24,9 @@ export class ConfidentialClient implements OAuth2Client {
 
   /**
    * @param path Path to credentials configuration file.
+   * @param agent Proxy agent to use for requests.
    */
-  constructor(path: string);
+  constructor(path: string,agent?: { proxy: string });
 
   /**
    * Example config
@@ -54,9 +57,12 @@ export class ConfidentialClient implements OAuth2Client {
    * @param config FacSet ConfidentialClient configuration object
    */
   constructor(config: ConfidentialClientConfiguration);
-  constructor(param: ConfidentialClientConfiguration | string) {
+  constructor(param: ConfidentialClientConfiguration | string,agent?: { proxy: string }) {
     this._config = Configuration.loadConfig(param);
     this._token = new Token('', 0);
+    if (agent) {
+      this._config.proxy = agent?.proxy;
+    }
   }
 
   /**
@@ -80,7 +86,11 @@ export class ConfidentialClient implements OAuth2Client {
     }
     debug('Token is expired or invalid');
 
-    if (this._openIDClient === undefined) {
+    if (this._config.proxy) {
+      const proxyAgent = HttpsProxyAgent(`${this._config.proxy}`);
+
+      this._openIDClient = await OpenIDClientFactory.getClient(this._config,proxyAgent);
+    } else {
       this._openIDClient = await OpenIDClientFactory.getClient(this._config);
     }
 
