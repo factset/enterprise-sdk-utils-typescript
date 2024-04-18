@@ -84,7 +84,8 @@ describe('test ConfidentialClient class', () => {
 
       mocked(OpenIDClientFactory.getClient).mockResolvedValue({
         grant: jest.fn().mockResolvedValue({
-          access_token: 'test_token',expires_at:Math.floor(Date.now() / 1000) + 900,
+          access_token: 'test_token',
+          expires_at: Math.floor(Date.now() / 1000) + 900,
         }),
       } as unknown as Client);
 
@@ -92,7 +93,10 @@ describe('test ConfidentialClient class', () => {
 
       await confidentialClient.getAccessToken();
 
-      expect(OpenIDClientFactory.getClient).toHaveBeenCalledWith(expect.objectContaining({ proxy:proxyUrl }),new HttpsProxyAgent('http://proxy.example.com:8080'));
+      expect(OpenIDClientFactory.getClient).toHaveBeenCalledWith(
+        expect.objectContaining({ proxy: proxyUrl }),
+        new HttpsProxyAgent('http://proxy.example.com:8080'),
+      );
     });
   });
 });
