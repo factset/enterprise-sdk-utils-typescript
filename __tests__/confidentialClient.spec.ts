@@ -2,14 +2,9 @@ import { Client } from 'openid-client';
 import { mocked } from 'ts-jest/utils';
 import { ConfidentialClient } from '../src';
 import { OpenIDClientFactory } from '../src/openIDClientFactory';
+import { HttpsProxyAgent } from 'https-proxy-agent';
 
 jest.mock('../src/openIDClientFactory');
-
-jest.mock('https-proxy-agent', () => {
-  return jest.fn().mockImplementation(function (this: { proxy: string }) {
-    this.proxy = 'http://proxy.example.com:8080';
-  });
-});
 
 describe('test ConfidentialClient class', () => {
   describe('test instanciating', () => {
@@ -86,15 +81,18 @@ describe('test ConfidentialClient class', () => {
 
     test('should use the proxy agent if provided', async () => {
       const proxyUrl = 'http://proxy.example.com:8080';
+
       mocked(OpenIDClientFactory.getClient).mockResolvedValue({
         grant: jest.fn().mockResolvedValue({
-          access_token: 'test_token',
+          access_token: 'test_token',expires_at:Math.floor(Date.now() / 1000) + 900,
         }),
       } as unknown as Client);
 
       const confidentialClient = new ConfidentialClient('./__tests__/fixtures/validConfig.json', { proxy: proxyUrl });
 
-      await expect(confidentialClient.getAccessToken()).resolves.toBe('test_token');
+      await confidentialClient.getAccessToken();
+
+      expect(OpenIDClientFactory.getClient).toHaveBeenCalledWith(expect.objectContaining({ proxy:proxyUrl }),new HttpsProxyAgent('http://proxy.example.com:8080'));
     });
   });
 });

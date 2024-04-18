@@ -1,6 +1,7 @@
 import { OpenIDClientFactory } from '../src/openIDClientFactory';
 import { mocked } from 'ts-jest/utils';
-import { Client, Issuer } from 'openid-client';
+import { Client,custom,Issuer } from 'openid-client';
+import { HttpsProxyAgent } from 'https-proxy-agent';
 
 jest.mock('openid-client');
 
@@ -44,6 +45,21 @@ describe('Test OpenIDClientFactory class', () => {
       expect(grant).toBe('testgrant');
 
       expect(Issuer.discover).toHaveBeenCalledWith('testWellKnownUri');
+    });
+
+    test('should not throw an error and set proxy properly',async () => {
+      const proxyUrl = 'http://proxy.example.com:8080';
+
+      mocked(Issuer.discover).mockResolvedValue({
+        metadata:{
+          issuer:'test',token_endpoint:'token_endpoint',
+        },Client:jest.fn().mockReturnValue({
+          grant:jest.fn().mockResolvedValue('testgrant'),
+        }),
+      } as unknown as Issuer<Client>);
+
+      await OpenIDClientFactory.getClient(config,new HttpsProxyAgent(proxyUrl));
+      expect(custom.setHttpOptionsDefaults).toHaveBeenCalledWith({ agent:new HttpsProxyAgent(proxyUrl) });
     });
 
     test('should throw an error while retrieving contents from well known uri', async () => {

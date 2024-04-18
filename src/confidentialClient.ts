@@ -1,11 +1,11 @@
-import { AccessTokenError, ConfidentialClientConfiguration, OAuth2Client, Token } from '.';
+import { AccessTokenError,ConfidentialClientConfiguration,OAuth2Client,Token } from '.';
 import { OpenIDClientFactory } from './openIDClientFactory';
 import { Configuration } from './configuration';
 import { Client } from 'openid-client';
-import { JWT_EXPIRE_AFTER_SECS, JWT_NOT_BEFORE_SECS, PACKAGE_NAME } from './constants';
+import { JWT_EXPIRE_AFTER_SECS,JWT_NOT_BEFORE_SECS,PACKAGE_NAME } from './constants';
 import { unixTimestamp } from './unixTimestamp';
 import debugModule from 'debug';
-import HttpsProxyAgent from 'https-proxy-agent';
+import { HttpsProxyAgent } from 'https-proxy-agent';
 
 const debug = debugModule(`${PACKAGE_NAME}:ConfidentialClient`);
 
@@ -87,7 +87,7 @@ export class ConfidentialClient implements OAuth2Client {
     debug('Token is expired or invalid');
 
     if (this._config.proxy) {
-      const proxyAgent = HttpsProxyAgent(`${this._config.proxy}`);
+      const proxyAgent = new HttpsProxyAgent(`${this._config.proxy}`);
 
       this._openIDClient = await OpenIDClientFactory.getClient(this._config, proxyAgent);
     } else {
