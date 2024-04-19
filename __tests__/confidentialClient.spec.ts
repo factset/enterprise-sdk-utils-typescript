@@ -96,7 +96,7 @@ describe('test ConfidentialClient class', () => {
       await confidentialClient.getAccessToken();
 
       expect(OpenIDClientFactory.getClient).toHaveBeenCalledWith(
-        expect.objectContaining({ proxy: proxyUrl }),
+        expect.objectContaining({ proxyUrl: proxyUrl }),
         new HttpsProxyAgent('http://proxy.example.com:8080'),
       );
     });
