@@ -1,8 +1,8 @@
-import { AccessTokenError, ConfidentialClientConfiguration, OAuth2Client, Token } from '.';
+import { AccessTokenError,ConfidentialClientConfiguration,OAuth2Client,Token } from '.';
 import { OpenIDClientFactory } from './openIDClientFactory';
 import { Configuration } from './configuration';
 import { Client } from 'openid-client';
-import { JWT_EXPIRE_AFTER_SECS, JWT_NOT_BEFORE_SECS, PACKAGE_NAME } from './constants';
+import { JWT_EXPIRE_AFTER_SECS,JWT_NOT_BEFORE_SECS,PACKAGE_NAME } from './constants';
 import { unixTimestamp } from './unixTimestamp';
 import debugModule from 'debug';
 import { HttpsProxyAgent } from 'https-proxy-agent';
@@ -26,7 +26,7 @@ export class ConfidentialClient implements OAuth2Client {
    * @param path Path to credentials configuration file.
    * @param agent Proxy agent to use for requests.
    */
-  constructor(path: string, agent?: { proxy: string });
+  constructor(path: string,agent?: { proxyUrl: string });
 
   /**
    * Example config
@@ -57,11 +57,11 @@ export class ConfidentialClient implements OAuth2Client {
    * @param config FacSet ConfidentialClient configuration object
    */
   constructor(config: ConfidentialClientConfiguration);
-  constructor(param: ConfidentialClientConfiguration | string, agent?: { proxy: string }) {
+  constructor(param: ConfidentialClientConfiguration | string,agent?: { proxyUrl: string }) {
     this._config = Configuration.loadConfig(param);
     this._token = new Token('', 0);
     if (agent) {
-      this._config.proxy = agent?.proxy;
+      this._config.proxyUrl = agent?.proxyUrl;
     }
   }
 
@@ -86,8 +86,8 @@ export class ConfidentialClient implements OAuth2Client {
     }
     debug('Token is expired or invalid');
 
-    if (this._config.proxy) {
-      const proxyAgent = new HttpsProxyAgent(`${this._config.proxy}`);
+    if (this._config.proxyUrl) {
+      const proxyAgent = new HttpsProxyAgent(`${this._config.proxyUrl}`);
 
       this._openIDClient = await OpenIDClientFactory.getClient(this._config, proxyAgent);
     } else {

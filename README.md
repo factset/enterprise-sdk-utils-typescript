@@ -53,13 +53,25 @@ async function exampleRequest() {
 exampleRequest();
 ```
 
+## Configure a Proxy
+
+You can pass proxy settings to the ConfidentialClient if necessary. The proxy URL can be passed as an object with the
+proxyUrl property:
+
+```ts
+const confidentialClient = new ConfidentialClient('/path/to/config.json',{ proxyUrl:'http://username:password@proxy.example.com:8080' });
+```
+
 ## Modules
 
 Information about the various utility modules contained in this library can be found below.
 
 ### Authentication
 
-The [authentication module](src) provides helper classes that facilitate [OAuth 2.0](https://developer.factset.com/learn/authentication-oauth2) authentication and authorization with FactSet's APIs. Currently the module has support for the [client credentials flow](https://github.com/factset/oauth2-guidelines#client-credentials-flow-1).
+The [authentication module](src) provides helper classes that
+facilitate [OAuth 2.0](https://developer.factset.com/learn/authentication-oauth2) authentication and authorization with
+FactSet's APIs. Currently, the module has support for
+the [client credentials flow](https://github.com/factset/oauth2-guidelines#client-credentials-flow-1).
 
 Each helper class in the module has the following features:
 

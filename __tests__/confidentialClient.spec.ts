@@ -89,7 +89,9 @@ describe('test ConfidentialClient class', () => {
         }),
       } as unknown as Client);
 
-      const confidentialClient = new ConfidentialClient('./__tests__/fixtures/validConfig.json', { proxy: proxyUrl });
+      const confidentialClient = new ConfidentialClient('./__tests__/fixtures/validConfig.json',{
+        proxyUrl:proxyUrl,
+      });
 
       await confidentialClient.getAccessToken();
 
