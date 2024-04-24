@@ -21,12 +21,13 @@ export class ConfidentialClient implements OAuth2Client {
   private readonly _config: ConfidentialClientConfiguration;
   private _token: Token;
   private _openIDClient!: Client;
+  private _options: { proxyUrl: string } | null;
 
   /**
    * @param path Path to credentials configuration file.
-   * @param agent Proxy agent to use for requests.
+   * @param _options HTTP proxy options.
    */
-  constructor(path: string, agent?: { proxyUrl: string });
+  constructor(path: string, _options?: { proxyUrl: string });
 
   /**
    * Example config
@@ -57,12 +58,10 @@ export class ConfidentialClient implements OAuth2Client {
    * @param config FacSet ConfidentialClient configuration object
    */
   constructor(config: ConfidentialClientConfiguration);
-  constructor(param: ConfidentialClientConfiguration | string, agent?: { proxyUrl: string }) {
+  constructor(param: ConfidentialClientConfiguration | string, _options?: { proxyUrl: string }) {
     this._config = Configuration.loadConfig(param);
     this._token = new Token('', 0);
-    if (agent) {
-      this._config.proxyUrl = agent?.proxyUrl;
-    }
+    this._options = _options ?? null;
   }
 
   /**
@@ -86,8 +85,8 @@ export class ConfidentialClient implements OAuth2Client {
     }
     debug('Token is expired or invalid');
 
-    if (this._config.proxyUrl) {
-      const proxyAgent = new HttpsProxyAgent(`${this._config.proxyUrl}`);
+    if (this._options?.proxyUrl) {
+      const proxyAgent = new HttpsProxyAgent(`${this._options.proxyUrl}`);
 
       this._openIDClient = await OpenIDClientFactory.getClient(this._config, proxyAgent);
     } else {

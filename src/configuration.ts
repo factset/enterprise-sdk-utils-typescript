@@ -16,7 +16,6 @@ export type ConfidentialClientConfiguration = {
   owners: Array<string>;
   wellKnownUri: string;
   jwk: ConfidentialClientJwk;
-  proxyUrl?: string;
 };
 
 const schema = joi.object({
