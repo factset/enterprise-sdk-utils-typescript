@@ -53,7 +53,7 @@ async function exampleRequest() {
 exampleRequest();
 ```
 
-## Configure a Proxy
+### Configure a Proxy
 
 You can pass proxy settings to the ConfidentialClient if necessary. The proxy URL can be passed as an object with the proxyUrl property:
 
