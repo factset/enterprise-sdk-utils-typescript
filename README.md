@@ -58,7 +58,7 @@ exampleRequest();
 You can pass proxy settings to the ConfidentialClient if necessary. The proxy URL can be passed as an object with the proxyUrl property:
 
 ```ts
-const confidentialClient = new ConfidentialClient('/path/to/config.json',{ proxyUrl: 'http://username:password@proxy.example.com:8080' });
+const confidentialClient = new ConfidentialClient('/path/to/config.json', { proxyUrl: 'http://username:password@proxy.example.com:8080' });
 ```
 
 ## Modules
