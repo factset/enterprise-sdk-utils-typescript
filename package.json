@@ -1,7 +1,7 @@
 {
   "name": "@factset/sdk-utils",
   "description": "Utilities for interacting with FactSet APIs.",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "homepage": "https://developer.factset.com",
   "repository": "FactSet/enterprise-sdk-utils-typescript.git",
   "main": "lib/index.js",
@@ -9,7 +9,7 @@
   "author": "FactSet Research Systems",
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=12"
+    "node": ">=18"
   },
   "keywords": [
     "FactSet",
