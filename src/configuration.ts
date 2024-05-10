@@ -4,6 +4,7 @@ import { ConfigurationError } from './errors';
 import { FACTSET_WELL_KNOWN_URI, PACKAGE_NAME } from './constants';
 import { readFileSync } from 'fs';
 import debugModule from 'debug';
+
 const debug = debugModule(`${PACKAGE_NAME}:configuration`);
 
 export type ConfidentialClientJwk = jose.JWK;

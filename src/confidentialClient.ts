@@ -1,10 +1,12 @@
-import { Token, AccessTokenError, ConfidentialClientConfiguration, OAuth2Client } from '.';
+import { AccessTokenError, ConfidentialClientConfiguration, OAuth2Client, Token } from '.';
 import { OpenIDClientFactory } from './openIDClientFactory';
 import { Configuration } from './configuration';
 import { Client } from 'openid-client';
-import { PACKAGE_NAME, JWT_NOT_BEFORE_SECS, JWT_EXPIRE_AFTER_SECS } from './constants';
+import { JWT_EXPIRE_AFTER_SECS, JWT_NOT_BEFORE_SECS, PACKAGE_NAME } from './constants';
 import { unixTimestamp } from './unixTimestamp';
 import debugModule from 'debug';
+import { HttpsProxyAgent } from 'https-proxy-agent';
+
 const debug = debugModule(`${PACKAGE_NAME}:ConfidentialClient`);
 
 /**
@@ -19,11 +21,13 @@ export class ConfidentialClient implements OAuth2Client {
   private readonly _config: ConfidentialClientConfiguration;
   private _token: Token;
   private _openIDClient!: Client;
+  private _options: { proxyUrl: string } | null;
 
   /**
    * @param path Path to credentials configuration file.
+   * @param _options HTTP proxy options.
    */
-  constructor(path: string);
+  constructor(path: string, _options?: { proxyUrl: string });
 
   /**
    * Example config
@@ -54,9 +58,10 @@ export class ConfidentialClient implements OAuth2Client {
    * @param config FacSet ConfidentialClient configuration object
    */
   constructor(config: ConfidentialClientConfiguration);
-  constructor(param: ConfidentialClientConfiguration | string) {
+  constructor(param: ConfidentialClientConfiguration | string, _options?: { proxyUrl: string }) {
     this._config = Configuration.loadConfig(param);
     this._token = new Token('', 0);
+    this._options = _options ?? null;
   }
 
   /**
@@ -80,7 +85,11 @@ export class ConfidentialClient implements OAuth2Client {
     }
     debug('Token is expired or invalid');
 
-    if (this._openIDClient === undefined) {
+    if (this._options?.proxyUrl) {
+      const proxyAgent = new HttpsProxyAgent(`${this._options.proxyUrl}`);
+
+      this._openIDClient = await OpenIDClientFactory.getClient(this._config, proxyAgent);
+    } else {
       this._openIDClient = await OpenIDClientFactory.getClient(this._config);
     }
 
