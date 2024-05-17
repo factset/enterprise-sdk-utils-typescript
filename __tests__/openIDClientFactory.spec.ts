@@ -49,6 +49,7 @@ describe('Test OpenIDClientFactory class', () => {
 
     test('should not throw an error and set proxy properly', async () => {
       const proxyUrl = 'http://proxy.example.com:8080';
+      const userAgent = `fds-sdk/javascript/utils/2.0.1 (${process.platform}; node ${process.version})`;
 
       mocked(Issuer.discover).mockResolvedValue({
         metadata: {
@@ -61,7 +62,10 @@ describe('Test OpenIDClientFactory class', () => {
       } as unknown as Issuer<Client>);
 
       await OpenIDClientFactory.getClient(config, new HttpsProxyAgent(proxyUrl));
-      expect(custom.setHttpOptionsDefaults).toHaveBeenCalledWith({ agent: new HttpsProxyAgent(proxyUrl) });
+      expect(custom.setHttpOptionsDefaults).toHaveBeenCalledWith({
+        agent: new HttpsProxyAgent(proxyUrl),
+        headers: { 'user-agent': userAgent },
+      });
     });
 
     test('should throw an error while retrieving contents from well known uri', async () => {
