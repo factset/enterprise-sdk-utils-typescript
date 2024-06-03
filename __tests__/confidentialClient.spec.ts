@@ -7,6 +7,10 @@ import { HttpsProxyAgent } from 'https-proxy-agent';
 jest.mock('../src/openIDClientFactory');
 
 describe('test ConfidentialClient class', () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+
   describe('test instanciating', () => {
     test('should create an instance', () => {
       const cf = new ConfidentialClient('./__tests__/fixtures/validConfig.json');
@@ -81,8 +85,8 @@ describe('test ConfidentialClient class', () => {
 
     test('should use the proxy agent if provided', async () => {
       const proxyUrl = 'http://proxy.example.com:8080';
-
-      mocked(OpenIDClientFactory.getClient).mockResolvedValue({
+      const getClientMock = mocked(OpenIDClientFactory.getClient);
+      getClientMock.mockResolvedValue({
         grant: jest.fn().mockResolvedValue({
           access_token: 'test_token',
           expires_at: Math.floor(Date.now() / 1000) + 900,
@@ -90,15 +94,14 @@ describe('test ConfidentialClient class', () => {
       } as unknown as Client);
 
       const confidentialClient = new ConfidentialClient('./__tests__/fixtures/validConfig.json', {
-        proxyUrl: proxyUrl,
+        proxyUrl,
       });
 
       await confidentialClient.getAccessToken();
-
-      expect(OpenIDClientFactory.getClient).toHaveBeenCalledWith(
-        expect.anything(),
-        new HttpsProxyAgent('http://proxy.example.com:8080'),
-      );
+      const getClientArgs = getClientMock.mock.calls[0];
+      const proxyAgent = getClientArgs[1] as HttpsProxyAgent<string>;
+      expect(proxyAgent.proxy.toString()).toContain(proxyUrl);
+      expect(OpenIDClientFactory.getClient).toHaveBeenCalledWith(expect.anything(), expect.any(HttpsProxyAgent));
     });
   });
 });
