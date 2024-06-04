@@ -60,8 +60,9 @@ describe('Test OpenIDClientFactory class', () => {
         }),
       } as unknown as Issuer<Client>);
 
-      await OpenIDClientFactory.getClient(config, new HttpsProxyAgent(proxyUrl));
-      expect(custom.setHttpOptionsDefaults).toHaveBeenCalledWith({ agent: new HttpsProxyAgent(proxyUrl) });
+      const agent = new HttpsProxyAgent(proxyUrl);
+      await OpenIDClientFactory.getClient(config, agent);
+      expect(custom.setHttpOptionsDefaults).toHaveBeenCalledWith({ agent });
     });
 
     test('should throw an error while retrieving contents from well known uri', async () => {
