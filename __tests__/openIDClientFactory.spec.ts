@@ -61,9 +61,10 @@ describe('Test OpenIDClientFactory class', () => {
         }),
       } as unknown as Issuer<Client>);
 
-      await OpenIDClientFactory.getClient(config, new HttpsProxyAgent(proxyUrl));
+      const agent = new HttpsProxyAgent(proxyUrl);
+      await OpenIDClientFactory.getClient(config, agent);
       expect(custom.setHttpOptionsDefaults).toHaveBeenCalledWith({
-        agent: new HttpsProxyAgent(proxyUrl),
+        agent: agent,
         headers: { 'user-agent': userAgent },
       });
     });
