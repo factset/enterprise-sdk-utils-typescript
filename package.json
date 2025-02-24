@@ -27,7 +27,7 @@
     "CONTRIBUTING.md"
   ],
   "dependencies": {
-    "debug": "^4.3.5",
+    "debug": "^4.4.0",
     "https-proxy-agent": "^7.0.2",
     "joi": "^17.13.1",
     "jose": "^4.15.4",
