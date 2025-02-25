@@ -30,7 +30,7 @@
     "debug": "^4.4.0",
     "https-proxy-agent": "^7.0.6",
     "joi": "^17.13.3",
-    "jose": "^4.15.4",
+    "jose": "^6.0.6",
     "openid-client": "^5.6.5"
   },
   "devDependencies": {
