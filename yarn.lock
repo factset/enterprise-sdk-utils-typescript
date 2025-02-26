@@ -2534,10 +2534,15 @@ joi@^17.13.3:
     "@sideway/formula" "^3.0.1"
     "@sideway/pinpoint" "^2.0.0"
 
-jose@^4.15.4, jose@^4.15.5:
+jose@^4.15.5:
   version "4.15.5"
   resolved "https://registry.npmjs.org/jose/-/jose-4.15.5.tgz#6475d0f467ecd3c630a1b5dadd2735a7288df706"
   integrity sha512-jc7BFxgKPKi94uOvEmzlSWFFe2+vASyXaKUpdQKatWAESU2MWjDfFf0fdfc83CDKcA5QecabZeNLyfhe3yKNkg==
+
+jose@^6.0.7:
+  version "6.0.7"
+  resolved "https://registry.npmjs.org/jose/-/jose-6.0.7.tgz#81efefce37f3a21fe9f5a03dd0849bfc86d504d3"
+  integrity sha512-IEsxVzzz+j8mNYlZYSxqNNy9RHbPQSIh9R81ZEgYzjsgAeuLLqhXnHBbc0hEotW0r3j7u9PYYWDepWHdVUOdsQ==
 
 js-tokens@^4.0.0:
   version "4.0.0"
