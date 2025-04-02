@@ -1,5 +1,4 @@
 import { Client } from 'openid-client';
-import { mocked } from 'ts-jest/utils';
 import { ConfidentialClient } from '../src';
 import { OpenIDClientFactory } from '../src/openIDClientFactory';
 import { HttpsProxyAgent } from 'https-proxy-agent';
@@ -28,7 +27,7 @@ describe('test ConfidentialClient class', () => {
 
   describe('test getAccessToken function', () => {
     test('check access token logic', async () => {
-      jest.useFakeTimers('modern');
+      jest.useFakeTimers();
 
       const mockGrant = jest.fn().mockImplementation(() => {
         const date = Math.floor(Date.now() / 1000);
@@ -39,7 +38,7 @@ describe('test ConfidentialClient class', () => {
         });
       });
 
-      mocked(OpenIDClientFactory.getClient).mockResolvedValue({
+      jest.mocked(OpenIDClientFactory.getClient).mockResolvedValue({
         grant: mockGrant,
       } as unknown as Client);
 
@@ -62,7 +61,7 @@ describe('test ConfidentialClient class', () => {
     });
 
     test('should throw an invalid token error', async () => {
-      mocked(OpenIDClientFactory.getClient).mockResolvedValue({
+      jest.mocked(OpenIDClientFactory.getClient).mockResolvedValue({
         grant: jest.fn().mockResolvedValue({
           access_token: 'test_token',
         }),
@@ -74,7 +73,7 @@ describe('test ConfidentialClient class', () => {
     });
 
     test('should throw an get access token error', async () => {
-      mocked(OpenIDClientFactory.getClient).mockResolvedValue({
+      jest.mocked(OpenIDClientFactory.getClient).mockResolvedValue({
         grant: jest.fn().mockRejectedValue('error'),
       } as unknown as Client);
 
@@ -85,7 +84,7 @@ describe('test ConfidentialClient class', () => {
 
     test('should use the proxy agent if provided', async () => {
       const proxyUrl = 'http://proxy.example.com:8080';
-      const getClientMock = mocked(OpenIDClientFactory.getClient);
+      const getClientMock = jest.mocked(OpenIDClientFactory.getClient);
       getClientMock.mockResolvedValue({
         grant: jest.fn().mockResolvedValue({
           access_token: 'test_token',
