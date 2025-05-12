@@ -1,4 +1,4 @@
-import { Configuration } from '../src/configuration';
+import {Configuration} from '../src/configuration';
 
 const validTestConfig = {
   name: 'name',
@@ -34,7 +34,7 @@ describe('test validateConfig function', () => {
     expect(() => {
       Configuration.validateConfig({});
     }).toThrow(
-      'Configuration is not valid: "name" is required. "clientId" is required. "clientAuthType" is required. "owners" is required. "jwk" is required',
+      'Configuration is not valid: "name" is required. "clientId" is required. "clientAuthType" is required. "owners" is required. "jwk" is required'
     );
   });
 });
@@ -64,7 +64,7 @@ describe('test loadConfig function', () => {
     expect(() => {
       Configuration.loadConfig('./__tests__/fixtures/validConfig.json.not.there');
     }).toThrow(
-      "Could not load config: ./__tests__/fixtures/validConfig.json.not.there (Error: ENOENT: no such file or directory, open './__tests__/fixtures/validConfig.json.not.there')",
+      "Could not load config: ./__tests__/fixtures/validConfig.json.not.there (Error: ENOENT: no such file or directory, open './__tests__/fixtures/validConfig.json.not.there')"
     );
   });
 
@@ -72,7 +72,7 @@ describe('test loadConfig function', () => {
     expect(() => {
       Configuration.loadConfig(12345 as unknown as string);
     }).toThrow(
-      'Invalid parameter type, needs to be a path (string) or configuration (ConfidentialClientConfiguration)',
+      'Invalid parameter type, needs to be a path (string) or configuration (ConfidentialClientConfiguration)'
     );
   });
 });

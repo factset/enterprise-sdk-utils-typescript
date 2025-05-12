@@ -1,4 +1,4 @@
-import { unixTimestamp } from '../src/unixTimestamp';
+import {unixTimestamp} from '../src/unixTimestamp';
 
 describe('test unixTimestamp function', () => {
   test('should generate proper dates', () => {

@@ -1,7 +1,7 @@
-import { Client } from 'openid-client';
-import { ConfidentialClient } from '../src';
-import { OpenIDClientFactory } from '../src/openIDClientFactory';
-import { HttpsProxyAgent } from 'https-proxy-agent';
+import {Client} from 'openid-client';
+import {ConfidentialClient} from '../src';
+import {OpenIDClientFactory} from '../src/openIDClientFactory';
+import {HttpsProxyAgent} from 'https-proxy-agent';
 
 jest.mock('../src/openIDClientFactory');
 
@@ -20,7 +20,7 @@ describe('test ConfidentialClient class', () => {
       expect(() => {
         new ConfidentialClient('./file.not.there');
       }).toThrow(
-        "Could not load config: ./file.not.there (Error: ENOENT: no such file or directory, open './file.not.there')",
+        "Could not load config: ./file.not.there (Error: ENOENT: no such file or directory, open './file.not.there')"
       );
     });
   });

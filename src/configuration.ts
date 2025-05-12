@@ -1,8 +1,8 @@
 import joi from 'joi';
 import * as jose from 'jose';
-import { ConfigurationError } from './errors';
-import { FACTSET_WELL_KNOWN_URI, PACKAGE_NAME } from './constants';
-import { readFileSync } from 'fs';
+import {ConfigurationError} from './errors';
+import {FACTSET_WELL_KNOWN_URI, PACKAGE_NAME} from './constants';
+import {readFileSync} from 'fs';
 import debugModule from 'debug';
 
 const debug = debugModule(`${PACKAGE_NAME}:configuration`);
@@ -45,7 +45,7 @@ const schema = joi.object({
 export class Configuration {
   public static validateConfig(config: unknown): ConfidentialClientConfiguration {
     debug('Validating the config');
-    const result = schema.validate(config, { abortEarly: false, errors: {} });
+    const result = schema.validate(config, {abortEarly: false, errors: {}});
 
     if (result.error !== undefined) {
       throw new ConfigurationError(`Configuration is not valid: ${result.error.message}`);
@@ -78,7 +78,7 @@ export class Configuration {
     }
 
     throw new ConfigurationError(
-      'Invalid parameter type, needs to be a path (string) or configuration (ConfidentialClientConfiguration)"',
+      'Invalid parameter type, needs to be a path (string) or configuration (ConfidentialClientConfiguration)"'
     );
   }
 }

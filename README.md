@@ -2,8 +2,7 @@
 
 # FactSet SDK Utilities for TypeScript and JavaScript
 
-![npm](https://img.shields.io/npm/v/@factset/sdk-utils)
-[![Apache-2 license](https://img.shields.io/badge/license-Apache2-brightgreen.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+![npm](https://img.shields.io/npm/v/@factset/sdk-utils) [![Apache-2 license](https://img.shields.io/badge/license-Apache2-brightgreen.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
 This repository contains a collection of utilities that supports FactSet's SDK in TypeScript and JavaScript, and facilitate usage of FactSet APIs.
 
@@ -25,7 +24,7 @@ yarn add @factset/sdk-utils
 
 This library contains multiple modules, sample usage of each module is below.
 
-### Authentication
+### How to authenticate
 
 First, you need to create the OAuth 2.0 client configuration that will be used to authenticate against FactSet's APIs:
 
@@ -33,7 +32,7 @@ First, you need to create the OAuth 2.0 client configuration that will be used t
 2. When prompted, download the configuration file and move it to your development environment.
 
 ```ts
-import { ConfidentialClient } from '@factset/sdk-utils';
+import {ConfidentialClient} from '@factset/sdk-utils';
 import axios from 'axios';
 
 async function exampleRequest() {
@@ -58,7 +57,9 @@ exampleRequest();
 You can pass proxy settings to the ConfidentialClient if necessary. The proxy URL can be passed as an object with the proxyUrl property:
 
 ```ts
-const confidentialClient = new ConfidentialClient('/path/to/config.json', { proxyUrl: 'http://username:password@proxy.example.com:8080' });
+const confidentialClient = new ConfidentialClient('/path/to/config.json', {
+  proxyUrl: 'http://username:password@proxy.example.com:8080',
+});
 ```
 
 ## Modules
@@ -71,10 +72,10 @@ The [authentication module](src) provides helper classes that facilitate [OAuth 
 
 Each helper class in the module has the following features:
 
-* Accepts a `Configuration` instance that contains information about the OAuth 2.0 client, including the client ID and private key.
-* Performs authentication with FactSet's OAuth 2.0 authorization server and retrieves an access token.
-* Caches the access token for reuse and requests a new access token as needed when one expires.
-    * In order for this to work correctly, the helper class instance should be reused in production environments.
+- Accepts a `Configuration` instance that contains information about the OAuth 2.0 client, including the client ID and private key.
+- Performs authentication with FactSet's OAuth 2.0 authorization server and retrieves an access token.
+- Caches the access token for reuse and requests a new access token as needed when one expires.
+  - In order for this to work correctly, the helper class instance should be reused in production environments.
 
 #### Configuration
 
@@ -82,24 +83,24 @@ Classes in the authentication module require OAuth 2.0 client configuration info
 
 ```json
 {
-    "name": "Application name registered with FactSet's Developer Portal",
-    "clientId": "OAuth 2.0 Client ID registered with FactSet's Developer Portal",
-    "clientAuthType": "Confidential",
-    "owners": ["USERNAME-SERIAL"],
-    "jwk": {
-        "kty": "RSA",
-        "use": "sig",
-        "alg": "RS256",
-        "kid": "Key ID",
-        "d": "ECC Private Key",
-        "n": "Modulus",
-        "e": "Exponent",
-        "p": "First Prime Factor",
-        "q": "Second Prime Factor",
-        "dp": "First Factor CRT Exponent",
-        "dq": "Second Factor CRT Exponent",
-        "qi": "First CRT Coefficient"
-    }
+  "name": "Application name registered with FactSet's Developer Portal",
+  "clientId": "OAuth 2.0 Client ID registered with FactSet's Developer Portal",
+  "clientAuthType": "Confidential",
+  "owners": ["USERNAME-SERIAL"],
+  "jwk": {
+    "kty": "RSA",
+    "use": "sig",
+    "alg": "RS256",
+    "kid": "Key ID",
+    "d": "ECC Private Key",
+    "n": "Modulus",
+    "e": "Exponent",
+    "p": "First Prime Factor",
+    "q": "Second Prime Factor",
+    "dp": "First Factor CRT Exponent",
+    "dq": "Second Factor CRT Exponent",
+    "qi": "First CRT Coefficient"
+  }
 }
 ```
 
@@ -107,26 +108,26 @@ The other option is to pass in the `ConfidentialClientConfiguration` instance wh
 
 ```ts
 const confidentialClientConfiguration = {
-    name: "Application name registered with FactSet's Developer Portal",
-    clientId: "OAuth 2.0 Client ID registered with FactSet's Developer Portal",
-    clientAuthType: "Confidential",
-    owners: ["USERNAME-SERIAL"],
-    jwk: {
-        kty: "RSA",
-        use: "sig",
-        alg: "RS256",
-        kid: "Key ID",
-        d: "ECC Private Key",
-        n: "Modulus",
-        e: "Exponent",
-        p: "First Prime Factor",
-        q: "Second Prime Factor",
-        dp: "First Factor CRT Exponent",
-        dq: "Second Factor CRT Exponent",
-        qi: "First CRT Coefficient"
-    }
+  name: "Application name registered with FactSet's Developer Portal",
+  clientId: "OAuth 2.0 Client ID registered with FactSet's Developer Portal",
+  clientAuthType: 'Confidential',
+  owners: ['USERNAME-SERIAL'],
+  jwk: {
+    kty: 'RSA',
+    use: 'sig',
+    alg: 'RS256',
+    kid: 'Key ID',
+    d: 'ECC Private Key',
+    n: 'Modulus',
+    e: 'Exponent',
+    p: 'First Prime Factor',
+    q: 'Second Prime Factor',
+    dp: 'First Factor CRT Exponent',
+    dq: 'Second Factor CRT Exponent',
+    qi: 'First CRT Coefficient',
+  },
 };
-```  
+```
 
 If you're just starting out, you can visit FactSet's Developer Portal to [create a new application](https://developer.factset.com/applications) and download a configuration file in this format.
 
@@ -140,14 +141,8 @@ Please refer to the [contributing guide](CONTRIBUTING.md).
 
 Copyright 2024 FactSet Research Systems Inc
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.

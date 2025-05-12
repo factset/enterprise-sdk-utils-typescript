@@ -1,8 +1,8 @@
-import { ConfidentialClientConfiguration, WellKnownURIError } from '.';
-import { Client, ClientAuthMethod, custom, Issuer } from 'openid-client';
+import {ConfidentialClientConfiguration, WellKnownURIError} from '.';
+import {Client, ClientAuthMethod, custom, Issuer} from 'openid-client';
 import debugModule from 'debug';
-import { PACKAGE_NAME } from './constants';
-import { Agent } from 'node:http';
+import {PACKAGE_NAME} from './constants';
+import {Agent} from 'node:http';
 
 const debug = debugModule(`${PACKAGE_NAME}:OpenIDClientFactory`);
 
@@ -37,7 +37,7 @@ export class OpenIDClientFactory {
       debug(
         'Retrieved issuer: %s and token_endpoint: %s from well_known_uri',
         issuer.metadata.issuer,
-        issuer.metadata.token_endpoint,
+        issuer.metadata.token_endpoint
       );
 
       return new issuer.Client(metadata, jwks);
