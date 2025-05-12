@@ -1,4 +1,4 @@
-import { AccessTokenError, ConfigurationError, WellKnownURIError } from '../src/index';
+import {AccessTokenError, ConfigurationError, WellKnownURIError} from '../src/index';
 
 describe('Test Errors', () => {
   test('Test AccessTokenError', () => {

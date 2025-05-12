@@ -37,6 +37,6 @@ addition to any acceptance criteria in an associated issue.
 
 Ensure the following things have been met before requesting a review:
 
-* [ ] Follows all project developer guide and coding standards.
-* [ ] Tests have been written for the change, when applicable.
-* [ ] Confidential information (credentials, auth tokens, etc...) is not included.
+- [ ] Follows all project developer guide and coding standards.
+- [ ] Tests have been written for the change, when applicable.
+- [ ] Confidential information (credentials, auth tokens, etc...) is not included.

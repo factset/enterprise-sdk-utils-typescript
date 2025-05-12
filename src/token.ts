@@ -1,4 +1,4 @@
-import { unixTimestamp } from './unixTimestamp';
+import {unixTimestamp} from './unixTimestamp';
 
 export class Token {
   private readonly _token: string;

@@ -1,6 +1,6 @@
-import { OpenIDClientFactory } from '../src/openIDClientFactory';
-import { Client, custom, Issuer } from 'openid-client';
-import { HttpsProxyAgent } from 'https-proxy-agent';
+import {OpenIDClientFactory} from '../src/openIDClientFactory';
+import {Client, custom, Issuer} from 'openid-client';
+import {HttpsProxyAgent} from 'https-proxy-agent';
 
 jest.mock('openid-client');
 
@@ -40,7 +40,7 @@ describe('Test OpenIDClientFactory class', () => {
       } as unknown as Issuer<Client>);
 
       const client = await OpenIDClientFactory.getClient(config);
-      const grant = await client.grant({ grant_type: 'client_credentials' });
+      const grant = await client.grant({grant_type: 'client_credentials'});
       expect(grant).toBe('testgrant');
 
       expect(Issuer.discover).toHaveBeenCalledWith('testWellKnownUri');
@@ -64,7 +64,7 @@ describe('Test OpenIDClientFactory class', () => {
       await OpenIDClientFactory.getClient(config, agent);
       expect(custom.setHttpOptionsDefaults).toHaveBeenCalledWith({
         agent: agent,
-        headers: { 'user-agent': userAgent },
+        headers: {'user-agent': userAgent},
       });
     });
 
@@ -72,7 +72,7 @@ describe('Test OpenIDClientFactory class', () => {
       jest.mocked(Issuer.discover).mockRejectedValue('test_error');
 
       await expect(OpenIDClientFactory.getClient(config)).rejects.toThrow(
-        'Error retrieving contents from the well_known_uri: testWellKnownUri',
+        'Error retrieving contents from the well_known_uri: testWellKnownUri'
       );
 
       expect(Issuer.discover).toHaveBeenCalledWith('testWellKnownUri');

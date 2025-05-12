@@ -12,11 +12,6 @@
     "noImplicitAny": true,
     "skipLibCheck": true
   },
-  "exclude": [
-    "lib",
-    "__tests__"
-  ],
-  "include": [
-    "src"
-  ]
+  "exclude": ["lib", "__tests__"],
+  "include": ["src"]
 }

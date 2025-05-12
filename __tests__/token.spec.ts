@@ -1,4 +1,4 @@
-import { Token } from '../src';
+import {Token} from '../src';
 
 describe('test Token Class', () => {
   test('should return expected values', () => {
