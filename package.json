@@ -32,7 +32,7 @@
     "CONTRIBUTING.md"
   ],
   "dependencies": {
-    "debug": "^4.4.0",
+    "debug": "^4.4.1",
     "https-proxy-agent": "^7.0.6",
     "joi": "^17.13.3",
     "jose": "^4.15.9",
