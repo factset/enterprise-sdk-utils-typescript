@@ -48,7 +48,7 @@ describe('Test OpenIDClientFactory class', () => {
 
     test('should not throw an error and set proxy properly', async () => {
       const proxyUrl = 'http://proxy.example.com:8080';
-      const userAgent = `fds-sdk/javascript/utils/2.1.0 (${process.platform}; node ${process.version})`;
+      const userAgent = `fds-sdk/javascript/utils/2.1.1 (${process.platform}; node ${process.version})`;
 
       jest.mocked(Issuer.discover).mockResolvedValue({
         metadata: {
