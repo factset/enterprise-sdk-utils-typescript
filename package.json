@@ -1,7 +1,7 @@
 {
   "name": "@factset/sdk-utils",
   "description": "Utilities for interacting with FactSet APIs.",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "homepage": "https://developer.factset.com",
   "repository": "FactSet/enterprise-sdk-utils-typescript.git",
   "main": "lib/index.js",
