@@ -34,7 +34,7 @@
   "dependencies": {
     "debug": "^4.4.1",
     "https-proxy-agent": "^7.0.6",
-    "joi": "^17.13.3",
+    "joi": "^18.0.2",
     "jose": "^4.15.9",
     "openid-client": "^5.7.1"
   },
