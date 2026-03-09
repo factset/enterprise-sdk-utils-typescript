@@ -42,7 +42,7 @@
     "@types/debug": "^4.1.12",
     "@types/jest": "^30.0.0",
     "@types/node": "^22.19.6",
-    "@typescript-eslint/eslint-plugin": "^8.53.0",
+    "@typescript-eslint/eslint-plugin": "^8.54.0",
     "@typescript-eslint/parser": "^8.54.0",
     "concurrently": "^9.2.1",
     "eslint": "^9.39.2",
