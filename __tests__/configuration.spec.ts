@@ -1,4 +1,5 @@
 import {Configuration} from '../src/configuration';
+import {describe} from 'node:test';
 
 const validTestConfig = {
   name: 'name',
@@ -36,6 +37,12 @@ describe('test validateConfig function', () => {
     }).toThrow(
       'Configuration is not valid: "name" is required. "clientId" is required. "clientAuthType" is required. "owners" is required. "jwk" is required'
     );
+  });
+
+  test('should accept and preserve unknown top-level properties', () => {
+    const configWithExtras = {...validTestConfig, scope: 'all', futureOption: {enabled: true}};
+    const config = Configuration.validateConfig(configWithExtras);
+    expect(config).toEqual(configWithExtras);
   });
 });
 
