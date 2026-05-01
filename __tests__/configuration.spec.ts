@@ -40,7 +40,7 @@ describe('test validateConfig function', () => {
   });
 
   test('should accept and preserve unknown top-level properties', () => {
-    const configWithExtras = {...validTestConfig, scope: 'all', futureOption: {enabled: true}};
+    const configWithExtras = {...validTestConfig, scope: 'all', futureOption: {x: true}};
     const config = Configuration.validateConfig(configWithExtras);
     expect(config).toEqual(configWithExtras);
   });
