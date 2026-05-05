@@ -22,17 +22,16 @@ jobs:
 
       - name: Setup .yarnrc.yml
         run: |
-          cat <<- 'EOF' >> .yarnrc.yml
-
-            npmScopes:
-              factset:
-                npmRegistryServer: "https://${{ secrets.NPM_PUBLISH_URL }}"
-                npmPublishRegistry: "https://${{ secrets.NPM_PUBLISH_URL }}"
-                npmAlwaysAuth: true
-            npmRegistries:
-              "//${{ secrets.NPM_PUBLISH_URL }}":
-                npmAuthToken: "${{ secrets.NPM_AUTH_TOKEN }}"
-                npmAlwaysAuth: true
+          cat <<'EOF' >> .yarnrc.yml
+          npmScopes:
+            factset:
+              npmRegistryServer: "https://${{ secrets.NPM_PUBLISH_URL }}"
+              npmPublishRegistry: "https://${{ secrets.NPM_PUBLISH_URL }}"
+              npmAlwaysAuth: true
+          npmRegistries:
+            "//${{ secrets.NPM_PUBLISH_URL }}":
+              npmAuthToken: "${{ secrets.NPM_AUTH_TOKEN }}"
+              npmAlwaysAuth: true
           EOF
 
       - name: Install dependencies
