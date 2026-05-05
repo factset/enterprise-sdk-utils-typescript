@@ -31,4 +31,4 @@ jobs:
 
       - name: Publish
         run: |
-          yarn publish --access public
+          yarn npm publish --access public
