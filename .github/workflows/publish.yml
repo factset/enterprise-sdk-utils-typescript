@@ -1,6 +1,7 @@
 name: Publish
 
 on:
+  workflow_dispatch:
   release:
     types: [published]
 
@@ -38,4 +39,4 @@ jobs:
 
       - name: Publish
         run: |
-          yarn npm publish --access public
+          yarn npm publish --access public --dry-run
