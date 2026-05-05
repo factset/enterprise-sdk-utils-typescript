@@ -17,12 +17,19 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Setup .npmrc
+      - name: Setup .yarnrc.yml
         run: |
-          cat <<- 'EOF' > .npmrc
-            @factset:registry=https://${{ secrets.NPM_PUBLISH_URL }}
-            //${{ secrets.NPM_PUBLISH_URL }}:_authToken=${{ secrets.NPM_AUTH_TOKEN }}
-            always-auth = true
+          cat <<- 'EOF' >> .yarnrc.yml
+
+            npmScopes:
+              factset:
+                npmRegistryServer: "https://${{ secrets.NPM_PUBLISH_URL }}"
+                npmPublishRegistry: "https://${{ secrets.NPM_PUBLISH_URL }}"
+                npmAlwaysAuth: true
+            npmRegistries:
+              "//${{ secrets.NPM_PUBLISH_URL }}":
+                npmAuthToken: "${{ secrets.NPM_AUTH_TOKEN }}"
+                npmAlwaysAuth: true
           EOF
 
       - name: Install dependencies
