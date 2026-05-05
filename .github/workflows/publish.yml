@@ -1,7 +1,9 @@
 name: Publish
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - chore/workflow/fix-publish-command-auth
   release:
     types: [published]
 
