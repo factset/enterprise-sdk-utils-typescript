@@ -16,7 +16,7 @@ export class OpenIDClientFactory {
       custom.setHttpOptionsDefaults({
         agent: proxyAgent,
         headers: {
-          'user-agent': `fds-sdk/javascript/utils/2.1.3 (${process.platform}; node ${process.version})`,
+          'user-agent': `fds-sdk/javascript/utils/2.1.4 (${process.platform}; node ${process.version})`,
         },
       });
     }
