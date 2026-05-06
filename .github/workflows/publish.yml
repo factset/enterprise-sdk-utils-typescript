@@ -1,9 +1,6 @@
 name: Publish
 
 on:
-  push:
-    branches:
-      - chore/workflow/fix-publish-build
   release:
     types: [published]
 
@@ -44,4 +41,4 @@ jobs:
 
       - name: Publish
         run: |
-          yarn npm publish --access public --dry-run
+          yarn npm publish --access public
