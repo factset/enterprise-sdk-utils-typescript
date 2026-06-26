@@ -1,5 +1,4 @@
 import {Configuration} from '../src/configuration';
-import {describe} from 'node:test';
 
 const validTestConfig = {
   name: 'name',

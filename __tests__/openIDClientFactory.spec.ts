@@ -2,7 +2,7 @@ import {OpenIDClientFactory} from '../src/openIDClientFactory';
 import {Client, custom, Issuer} from 'openid-client';
 import {HttpsProxyAgent} from 'https-proxy-agent';
 
-jest.mock('openid-client');
+vi.mock('openid-client');
 
 const config = {
   name: 'name',
@@ -29,13 +29,13 @@ const config = {
 describe('Test OpenIDClientFactory class', () => {
   describe('Test getClient function', () => {
     test('should not throw an error', async () => {
-      jest.mocked(Issuer.discover).mockResolvedValue({
+      vi.mocked(Issuer.discover).mockResolvedValue({
         metadata: {
           issuer: 'test',
           token_endpoint: 'token_endpint',
         },
-        Client: jest.fn().mockReturnValue({
-          grant: jest.fn().mockResolvedValue('testgrant'),
+        Client: vi.fn().mockImplementation(function () {
+          return {grant: vi.fn().mockResolvedValue('testgrant')};
         }),
       } as unknown as Issuer<Client>);
 
@@ -50,13 +50,13 @@ describe('Test OpenIDClientFactory class', () => {
       const proxyUrl = 'http://proxy.example.com:8080';
       const userAgent = `fds-sdk/javascript/utils/2.1.4 (${process.platform}; node ${process.version})`;
 
-      jest.mocked(Issuer.discover).mockResolvedValue({
+      vi.mocked(Issuer.discover).mockResolvedValue({
         metadata: {
           issuer: 'test',
           token_endpoint: 'token_endpoint',
         },
-        Client: jest.fn().mockReturnValue({
-          grant: jest.fn().mockResolvedValue('testgrant'),
+        Client: vi.fn().mockImplementation(function () {
+          return {grant: vi.fn().mockResolvedValue('testgrant')};
         }),
       } as unknown as Issuer<Client>);
 
@@ -69,7 +69,7 @@ describe('Test OpenIDClientFactory class', () => {
     });
 
     test('should throw an error while retrieving contents from well known uri', async () => {
-      jest.mocked(Issuer.discover).mockRejectedValue('test_error');
+      vi.mocked(Issuer.discover).mockRejectedValue('test_error');
 
       await expect(OpenIDClientFactory.getClient(config)).rejects.toThrow(
         'Error retrieving contents from the well_known_uri: testWellKnownUri'

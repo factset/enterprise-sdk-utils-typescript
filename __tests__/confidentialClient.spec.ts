@@ -3,11 +3,11 @@ import {ConfidentialClient} from '../src';
 import {OpenIDClientFactory} from '../src/openIDClientFactory';
 import {HttpsProxyAgent} from 'https-proxy-agent';
 
-jest.mock('../src/openIDClientFactory');
+vi.mock('../src/openIDClientFactory');
 
 describe('test ConfidentialClient class', () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   describe('test instanciating', () => {
@@ -27,9 +27,9 @@ describe('test ConfidentialClient class', () => {
 
   describe('test getAccessToken function', () => {
     test('check access token logic', async () => {
-      jest.useFakeTimers();
+      vi.useFakeTimers();
 
-      const mockGrant = jest.fn().mockImplementation(() => {
+      const mockGrant = vi.fn().mockImplementation(() => {
         const date = Math.floor(Date.now() / 1000);
 
         return Promise.resolve({
@@ -38,31 +38,31 @@ describe('test ConfidentialClient class', () => {
         });
       });
 
-      jest.mocked(OpenIDClientFactory.getClient).mockResolvedValue({
+      vi.mocked(OpenIDClientFactory.getClient).mockResolvedValue({
         grant: mockGrant,
       } as unknown as Client);
 
       const cf = new ConfidentialClient('./__tests__/fixtures/validConfig.json');
 
-      jest.setSystemTime(new Date('2020-01-01T12:00:00+00:00'));
+      vi.setSystemTime(new Date('2020-01-01T12:00:00+00:00'));
       const token1 = await cf.getAccessToken();
       expect(token1).toBe('test_token 1577880900');
       expect(mockGrant).toHaveBeenCalledTimes(1);
 
-      jest.setSystemTime(new Date('2020-01-01T12:10:00+00:00'));
+      vi.setSystemTime(new Date('2020-01-01T12:10:00+00:00'));
       const token2 = await cf.getAccessToken();
       expect(token2).toBe('test_token 1577880900');
       expect(mockGrant).toHaveBeenCalledTimes(1);
 
-      jest.setSystemTime(new Date('2020-01-01T12:30:00+00:00'));
+      vi.setSystemTime(new Date('2020-01-01T12:30:00+00:00'));
       const token3 = await cf.getAccessToken();
       expect(token3).toBe('test_token 1577882700');
       expect(mockGrant).toHaveBeenCalledTimes(2);
     });
 
     test('should throw an invalid token error', async () => {
-      jest.mocked(OpenIDClientFactory.getClient).mockResolvedValue({
-        grant: jest.fn().mockResolvedValue({
+      vi.mocked(OpenIDClientFactory.getClient).mockResolvedValue({
+        grant: vi.fn().mockResolvedValue({
           access_token: 'test_token',
         }),
       } as unknown as Client);
@@ -73,8 +73,8 @@ describe('test ConfidentialClient class', () => {
     });
 
     test('should throw an get access token error', async () => {
-      jest.mocked(OpenIDClientFactory.getClient).mockResolvedValue({
-        grant: jest.fn().mockRejectedValue('error'),
+      vi.mocked(OpenIDClientFactory.getClient).mockResolvedValue({
+        grant: vi.fn().mockRejectedValue('error'),
       } as unknown as Client);
 
       const confidentialClient = new ConfidentialClient('./__tests__/fixtures/validConfig.json');
@@ -84,9 +84,9 @@ describe('test ConfidentialClient class', () => {
 
     test('should use the proxy agent if provided', async () => {
       const proxyUrl = 'http://proxy.example.com:8080';
-      const getClientMock = jest.mocked(OpenIDClientFactory.getClient);
+      const getClientMock = vi.mocked(OpenIDClientFactory.getClient);
       getClientMock.mockResolvedValue({
-        grant: jest.fn().mockResolvedValue({
+        grant: vi.fn().mockResolvedValue({
           access_token: 'test_token',
           expires_at: Math.floor(Date.now() / 1000) + 900,
         }),
