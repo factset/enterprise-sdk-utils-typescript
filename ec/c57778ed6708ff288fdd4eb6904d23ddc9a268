@@ -1,0 +1,16 @@
+.github/workflows/ci.yml
+  h_6b41f3d2926256 47
+.github/workflows/publish.yml
+  h_6b41f3d2926256 18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "ecc57778ed6708ff288fdd4eb6904d23ddc9a268",
+  "prompts": {},
+  "humans": {
+    "h_6b41f3d2926256": {
+      "author": "Michael Matzka <14311597+mima0815@users.noreply.github.com>"
+    }
+  }
+}
