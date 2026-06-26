@@ -34,25 +34,27 @@
   "dependencies": {
     "debug": "^4.4.3",
     "https-proxy-agent": "^7.0.6",
-    "joi": "^18.1.2",
+    "joi": "^18.2.3",
     "jose": "^4.15.9",
     "openid-client": "^5.7.1"
   },
   "devDependencies": {
-    "@types/debug": "^4.1.12",
+    "@eslint/eslintrc": "^3.3.5",
+    "@eslint/js": "^10.0.1",
+    "@types/debug": "^4.1.13",
     "@types/jest": "^30.0.0",
-    "@types/node": "^22.19.6",
-    "@typescript-eslint/eslint-plugin": "^8.57.1",
-    "@typescript-eslint/parser": "^8.54.0",
-    "concurrently": "^9.2.1",
-    "eslint": "^9.39.2",
+    "@types/node": "^22.20.0",
+    "@typescript-eslint/eslint-plugin": "^8.62.0",
+    "@typescript-eslint/parser": "^8.62.0",
+    "concurrently": "^10.0.3",
+    "eslint": "^10.5.0",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.5",
-    "jest": "^30.3.0",
-    "prettier": "^3.8.1",
-    "ts-jest": "^29.4.6",
+    "eslint-plugin-prettier": "^5.5.6",
+    "jest": "^30.4.2",
+    "prettier": "^3.8.4",
+    "ts-jest": "^29.4.11",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },
-  "packageManager": "yarn@4.12.0"
+  "packageManager": "yarn@4.17.0"
 }
