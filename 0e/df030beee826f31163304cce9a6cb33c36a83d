@@ -1,0 +1,16 @@
+package.json
+  h_6b41f3d2926256 37,42-44,46-50,52-55,59
+.yarnrc.yml
+  h_6b41f3d2926256 1-2,5,7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "0edf030beee826f31163304cce9a6cb33c36a83d",
+  "prompts": {},
+  "humans": {
+    "h_6b41f3d2926256": {
+      "author": "Michael Matzka <14311597+mima0815@users.noreply.github.com>"
+    }
+  }
+}
