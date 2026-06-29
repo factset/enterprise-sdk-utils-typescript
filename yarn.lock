@@ -537,7 +537,7 @@ __metadata:
     https-proxy-agent: "npm:^7.0.6"
     jest: "npm:^30.4.2"
     joi: "npm:^18.2.3"
-    jose: "npm:^4.15.9"
+    jose: "npm:^6.2.3"
     openid-client: "npm:^5.7.1"
     prettier: "npm:^3.8.4"
     ts-jest: "npm:^29.4.11"
@@ -3329,6 +3329,13 @@ __metadata:
   version: 4.15.9
   resolution: "jose@npm:4.15.9"
   checksum: 10c0/4ed4ddf4a029db04bd167f2215f65d7245e4dc5f36d7ac3c0126aab38d66309a9e692f52df88975d99429e357e5fd8bab340ff20baab544d17684dd1d940a0f4
+  languageName: node
+  linkType: hard
+
+"jose@npm:^6.2.3":
+  version: 6.2.3
+  resolution: "jose@npm:6.2.3"
+  checksum: 10c0/aa91bccba22cc84d86308f833749bcb0b00441e35c24e0ac79abeac5f76dc62d47bdef9c1da6a0c609f5da6478595f52b252085888b89dbdb163861e40ea4188
   languageName: node
   linkType: hard
 
