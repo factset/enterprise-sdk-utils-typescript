@@ -31,11 +31,27 @@ describe('test validateConfig function', () => {
   });
 
   test('should throw an configuration error', () => {
-    expect(() => {
+    let error: Error | undefined;
+    try {
       Configuration.validateConfig({});
-    }).toThrow(
-      'Configuration is not valid: "name" is required. "clientId" is required. "clientAuthType" is required. "owners" is required. "jwk" is required'
-    );
+    } catch (e) {
+      error = e as Error;
+    }
+
+    expect(error).toBeInstanceOf(Error);
+    expect(error?.message).toContain('Configuration is not valid');
+    // All missing required fields are reported...
+    for (const field of ['name', 'clientId', 'clientAuthType', 'owners', 'jwk']) {
+      expect(error?.message).toContain(field);
+    }
+    // ...but wellKnownUri has a default, so it is not reported as missing.
+    expect(error?.message).not.toContain('wellKnownUri');
+  });
+
+  test('should throw a configuration error for a non-object input', () => {
+    expect(() => {
+      Configuration.validateConfig('not an object' as unknown);
+    }).toThrow('Configuration is not valid');
   });
 
   test('should accept and preserve unknown top-level properties', () => {
@@ -63,7 +79,10 @@ describe('test loadConfig function', () => {
   test('should throw an config error', () => {
     expect(() => {
       Configuration.loadConfig('./__tests__/fixtures/invalidConfig.json');
-    }).toThrow('Configuration is not valid: "clientId" is required');
+    }).toThrow('Configuration is not valid');
+    expect(() => {
+      Configuration.loadConfig('./__tests__/fixtures/invalidConfig.json');
+    }).toThrow('clientId');
   });
 
   test('should throw an file error', () => {

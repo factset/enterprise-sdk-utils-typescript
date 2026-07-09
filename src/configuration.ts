@@ -1,5 +1,4 @@
-import joi from 'joi';
-import * as jose from 'jose';
+import {z} from 'zod';
 import {ConfigurationError} from './errors';
 import {FACTSET_WELL_KNOWN_URI, PACKAGE_NAME} from './constants';
 import {readFileSync} from 'fs';
@@ -7,54 +6,55 @@ import debugModule from 'debug';
 
 const debug = debugModule(`${PACKAGE_NAME}:configuration`);
 
-export type ConfidentialClientJwk = jose.JWK;
+// The zod schema is the single source of truth for both runtime validation and
+// the exported types below (via z.infer), so the two can never drift apart.
+const jwkSchema = z.object({
+  kty: z.string(),
+  use: z.string(),
+  alg: z.string(),
+  kid: z.string(),
+  d: z.string(),
+  n: z.string(),
+  e: z.string(),
+  p: z.string(),
+  q: z.string(),
+  dp: z.string(),
+  dq: z.string(),
+  qi: z.string(),
+});
 
-export type ConfidentialClientConfiguration = {
-  name: string;
-  clientId: string;
-  clientAuthType: string;
-  owners: Array<string>;
-  wellKnownUri: string;
-  jwk: ConfidentialClientJwk;
-};
+// looseObject preserves unknown top-level keys (matching joi's `.unknown(true)`),
+// so forward-compatible config options are passed through untouched.
+const schema = z.looseObject({
+  name: z.string(),
+  clientId: z.string(),
+  clientAuthType: z.string(),
+  owners: z.array(z.string()).min(1),
+  wellKnownUri: z.url().default(FACTSET_WELL_KNOWN_URI),
+  jwk: jwkSchema,
+});
 
-const schema = joi
-  .object({
-    name: joi.string().required(),
-    clientId: joi.string().required(),
-    clientAuthType: joi.string().required(),
-    owners: joi.array().items(joi.string()).min(1).required(),
-    wellKnownUri: joi.string().uri().default(FACTSET_WELL_KNOWN_URI),
-    jwk: joi
-      .object({
-        kty: joi.string().required(),
-        use: joi.string().required(),
-        alg: joi.string().required(),
-        kid: joi.string().required(),
-        d: joi.string().required(),
-        n: joi.string().required(),
-        e: joi.string().required(),
-        p: joi.string().required(),
-        q: joi.string().required(),
-        dp: joi.string().required(),
-        dq: joi.string().required(),
-        qi: joi.string().required(),
-      })
-      .required(),
-  })
-  .unknown(true);
+export type ConfidentialClientJwk = z.infer<typeof jwkSchema>;
+
+export type ConfidentialClientConfiguration = z.infer<typeof schema>;
 
 export class Configuration {
   public static validateConfig(config: unknown): ConfidentialClientConfiguration {
     debug('Validating the config');
-    const result = schema.validate(config, {abortEarly: false, errors: {}});
+    const result = schema.safeParse(config);
 
-    if (result.error !== undefined) {
-      throw new ConfigurationError(`Configuration is not valid: ${result.error.message}`);
+    if (!result.success) {
+      const details = result.error.issues
+        .map((issue) => {
+          const path = issue.path.join('.');
+          return path ? `${path}: ${issue.message}` : issue.message;
+        })
+        .join('; ');
+      throw new ConfigurationError(`Configuration is not valid: ${details}`);
     }
 
     debug('Config is vaild');
-    return result.value;
+    return result.data;
   }
 
   public static loadConfig(param: ConfidentialClientConfiguration | string): ConfidentialClientConfiguration {

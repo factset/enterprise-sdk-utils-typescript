@@ -8,6 +8,6 @@ export default defineConfig({
       provider: 'v8',
       include: ['src/**/*.ts'],
     },
-    exclude: ['__tests__/fixtures/**', 'node_modules/**', 'lib/**'],
+    exclude: ['__tests__/fixtures/**', 'node_modules/**', 'dist/**'],
   },
 });
