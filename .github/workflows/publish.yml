@@ -1,44 +1,34 @@
-name: Publish
+name: Release Package
 
 on:
   release:
     types: [published]
 
+# Configure permissions so that the action is only allowed to read the code
+permissions:
+  id-token: write # Required for OIDC
+  contents: read
+
 jobs:
-  deploy:
-    name: Deploy to package index
-    runs-on: ubuntu-24.04
+  release:
+    name: Release Package
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v7
+      - name: Install Node
+        uses: actions/setup-node@v7
         with:
           node-version: '24'
-
-      - name: Setup .yarnrc.yml
-        run: |
-          cat <<'EOF' >> .yarnrc.yml
-          npmScopes:
-            factset:
-              npmRegistryServer: "https://${{ secrets.NPM_PUBLISH_URL }}"
-              npmPublishRegistry: "https://${{ secrets.NPM_PUBLISH_URL }}"
-              npmAlwaysAuth: true
-          npmRegistries:
-            "//${{ secrets.NPM_PUBLISH_URL }}":
-              npmAuthToken: "${{ secrets.NPM_AUTH_TOKEN }}"
-              npmAlwaysAuth: true
-          EOF
+          cache: 'yarn'
 
       - name: Install dependencies
-        run: |
-          yarn install
+        run: yarn install --immutable
 
       - name: Build package
-        run: |
-          yarn build
+        run: yarn build
 
       - name: Publish
-        run: |
-          yarn npm publish --access public
+        run: yarn npm publish --access public
