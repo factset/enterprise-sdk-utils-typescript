@@ -4,12 +4,12 @@
   "version": "2.1.5",
   "homepage": "https://developer.factset.com",
   "repository": "FactSet/enterprise-sdk-utils-typescript.git",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "author": "FactSet Research Systems",
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "bugs": {
     "url": "https://developer.factset.com"
@@ -20,7 +20,7 @@
     "SDK"
   ],
   "scripts": {
-    "build": "rm -rf ./lib && tsc",
+    "build": "rm -rf ./dist && tsc -p tsconfig.build.json",
     "lint": "concurrently -n Prettier,esLint \"yarn prettier:check\" \"yarn eslint:check\"",
     "lint:fix": "yarn prettier:fix && yarn eslint:fix",
     "prettier:check": "prettier --check .",
@@ -31,31 +31,32 @@
     "prepublishOnly": "yarn build"
   },
   "files": [
-    "lib",
+    "dist",
     "CONTRIBUTING.md"
   ],
   "dependencies": {
     "debug": "^4.4.3",
-    "https-proxy-agent": "^7.0.6",
-    "joi": "^18.2.5",
-    "jose": "^4.15.9",
-    "openid-client": "^5.7.1"
+    "jose": "^6.2.12",
+    "openid-client": "^6.8.8",
+    "undici": "^8.10.2",
+    "zod": "^4.5.4"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.6",
+    "@eslint/eslintrc": "^3.3.7",
     "@eslint/js": "^10.0.1",
     "@types/debug": "^4.1.13",
-    "@types/node": "^22.20.1",
-    "@typescript-eslint/eslint-plugin": "^8.68.0",
-    "@typescript-eslint/parser": "^8.68.0",
-    "@vitest/coverage-v8": "^4.1.11",
+    "@types/node": "^26.4.1",
+    "@typescript-eslint/eslint-plugin": "^8.69.0",
+    "@typescript-eslint/parser": "^8.69.0",
+    "@vitest/coverage-v8": "^5.0.0",
     "concurrently": "^10.0.5",
-    "eslint": "^10.9.1",
+    "eslint": "^10.10.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.6",
     "prettier": "^3.9.6",
     "typescript": "^5.9.3",
-    "vitest": "^4.1.11"
+    "vite": "^8.2.2",
+    "vitest": "^5.0.0"
   },
   "packageManager": "yarn@4.18.0"
 }

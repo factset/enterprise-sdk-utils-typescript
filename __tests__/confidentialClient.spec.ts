@@ -1,13 +1,24 @@
-import {Client} from 'openid-client';
+import * as client from 'openid-client';
 import {ConfidentialClient} from '../src';
 import {OpenIDClientFactory} from '../src/openIDClientFactory';
-import {HttpsProxyAgent} from 'https-proxy-agent';
 
 vi.mock('../src/openIDClientFactory');
+vi.mock('openid-client', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('openid-client')>();
+  return {
+    ...actual,
+    clientCredentialsGrant: vi.fn(),
+  };
+});
+
+type TokenResponse = Awaited<ReturnType<typeof client.clientCredentialsGrant>>;
 
 describe('test ConfidentialClient class', () => {
   beforeEach(() => {
     vi.resetAllMocks();
+    // The factory now returns an openid-client Configuration; the token itself is
+    // produced by the mocked clientCredentialsGrant below.
+    vi.mocked(OpenIDClientFactory.getClient).mockResolvedValue({} as client.Configuration);
   });
 
   describe('test instanciating', () => {
@@ -34,13 +45,10 @@ describe('test ConfidentialClient class', () => {
 
         return Promise.resolve({
           access_token: 'test_token ' + (date + 900),
-          expires_at: date + 900,
-        });
+          expires_in: 900,
+        } as TokenResponse);
       });
-
-      vi.mocked(OpenIDClientFactory.getClient).mockResolvedValue({
-        grant: mockGrant,
-      } as unknown as Client);
+      vi.mocked(client.clientCredentialsGrant).mockImplementation(mockGrant);
 
       const cf = new ConfidentialClient('./__tests__/fixtures/validConfig.json');
 
@@ -58,14 +66,14 @@ describe('test ConfidentialClient class', () => {
       const token3 = await cf.getAccessToken();
       expect(token3).toBe('test_token 1577882700');
       expect(mockGrant).toHaveBeenCalledTimes(2);
+
+      vi.useRealTimers();
     });
 
     test('should throw an invalid token error', async () => {
-      vi.mocked(OpenIDClientFactory.getClient).mockResolvedValue({
-        grant: vi.fn().mockResolvedValue({
-          access_token: 'test_token',
-        }),
-      } as unknown as Client);
+      vi.mocked(client.clientCredentialsGrant).mockResolvedValue({
+        access_token: 'test_token',
+      } as TokenResponse);
 
       const confidentialClient = new ConfidentialClient('./__tests__/fixtures/validConfig.json');
 
@@ -73,34 +81,27 @@ describe('test ConfidentialClient class', () => {
     });
 
     test('should throw an get access token error', async () => {
-      vi.mocked(OpenIDClientFactory.getClient).mockResolvedValue({
-        grant: vi.fn().mockRejectedValue('error'),
-      } as unknown as Client);
+      vi.mocked(client.clientCredentialsGrant).mockRejectedValue('error');
 
       const confidentialClient = new ConfidentialClient('./__tests__/fixtures/validConfig.json');
 
       await expect(confidentialClient.getAccessToken()).rejects.toThrow('Error attempting to get access token');
     });
 
-    test('should use the proxy agent if provided', async () => {
+    test('should pass the proxy url to the client factory if provided', async () => {
       const proxyUrl = 'http://proxy.example.com:8080';
-      const getClientMock = vi.mocked(OpenIDClientFactory.getClient);
-      getClientMock.mockResolvedValue({
-        grant: vi.fn().mockResolvedValue({
-          access_token: 'test_token',
-          expires_at: Math.floor(Date.now() / 1000) + 900,
-        }),
-      } as unknown as Client);
+      vi.mocked(client.clientCredentialsGrant).mockResolvedValue({
+        access_token: 'test_token',
+        expires_in: 900,
+      } as TokenResponse);
 
       const confidentialClient = new ConfidentialClient('./__tests__/fixtures/validConfig.json', {
         proxyUrl,
       });
 
       await confidentialClient.getAccessToken();
-      const getClientArgs = getClientMock.mock.calls[0];
-      const proxyAgent = getClientArgs[1] as HttpsProxyAgent<string>;
-      expect(proxyAgent.proxy.toString()).toContain(proxyUrl);
-      expect(OpenIDClientFactory.getClient).toHaveBeenCalledWith(expect.anything(), expect.any(HttpsProxyAgent));
+
+      expect(OpenIDClientFactory.getClient).toHaveBeenCalledWith(expect.anything(), proxyUrl);
     });
   });
 });

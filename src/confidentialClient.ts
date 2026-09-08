@@ -1,11 +1,10 @@
 import {AccessTokenError, ConfidentialClientConfiguration, OAuth2Client, Token} from '.';
 import {OpenIDClientFactory} from './openIDClientFactory';
 import {Configuration} from './configuration';
-import {Client} from 'openid-client';
-import {JWT_EXPIRE_AFTER_SECS, JWT_NOT_BEFORE_SECS, PACKAGE_NAME} from './constants';
+import * as client from 'openid-client';
+import {PACKAGE_NAME} from './constants';
 import {unixTimestamp} from './unixTimestamp';
 import debugModule from 'debug';
-import {HttpsProxyAgent} from 'https-proxy-agent';
 
 const debug = debugModule(`${PACKAGE_NAME}:ConfidentialClient`);
 
@@ -20,7 +19,7 @@ const debug = debugModule(`${PACKAGE_NAME}:ConfidentialClient`);
 export class ConfidentialClient implements OAuth2Client {
   private readonly _config: ConfidentialClientConfiguration;
   private _token: Token;
-  private _openIDClient!: Client;
+  private _openIDClient!: client.Configuration;
   private _options: {proxyUrl: string} | null;
 
   /**
@@ -85,13 +84,7 @@ export class ConfidentialClient implements OAuth2Client {
     }
     debug('Token is expired or invalid');
 
-    if (this._options?.proxyUrl) {
-      const proxyAgent = new HttpsProxyAgent(`${this._options.proxyUrl}`);
-
-      this._openIDClient = await OpenIDClientFactory.getClient(this._config, proxyAgent);
-    } else {
-      this._openIDClient = await OpenIDClientFactory.getClient(this._config);
-    }
+    this._openIDClient = await OpenIDClientFactory.getClient(this._config, this._options?.proxyUrl);
 
     this._token = await this.fetchAccessToken();
 
@@ -104,24 +97,18 @@ export class ConfidentialClient implements OAuth2Client {
     try {
       const now = unixTimestamp();
 
-      const tokenSet = await this._openIDClient.grant(
-        {
-          grant_type: 'client_credentials',
-        },
-        {
-          clientAssertionPayload: {
-            nbf: now - JWT_NOT_BEFORE_SECS,
-            iat: now,
-            exp: now + JWT_EXPIRE_AFTER_SECS,
-          },
-        }
-      );
+      // grant_type and the signed client assertion (incl. nbf/iat/exp) are handled
+      // internally by clientCredentialsGrant and the private_key_jwt client auth.
+      const tokenSet = await client.clientCredentialsGrant(this._openIDClient);
 
-      if (tokenSet.access_token === undefined || tokenSet.expires_at === undefined) {
+      if (tokenSet.access_token === undefined || tokenSet.expires_in === undefined) {
         throw new AccessTokenError('Got an invalid token');
       }
-      debug('Got access token that expires at %d, in %d seconds', tokenSet.expires_at, tokenSet.expires_in);
-      return new Token(tokenSet.access_token, tokenSet.expires_at);
+
+      // v6 returns expires_in (relative seconds); Token expects an absolute expiry.
+      const expiresAt = now + tokenSet.expires_in;
+      debug('Got access token that expires at %d, in %d seconds', expiresAt, tokenSet.expires_in);
+      return new Token(tokenSet.access_token, expiresAt);
     } catch (error) {
       if (error instanceof AccessTokenError) {
         throw error;

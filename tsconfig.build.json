@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    /* Visit https://aka.ms/tsconfig.json to read more about this file */
     "target": "es6",
     "module": "commonjs",
+    "rootDir": "./src",
     "declaration": true,
     "outDir": "./dist",
     "esModuleInterop": true,
@@ -12,5 +12,5 @@
     "skipLibCheck": true,
     "types": ["vitest/globals"]
   },
-  "include": ["./*.ts", "__tests__/**/*.ts", "__tests__/**/*.d.ts", "src/**/*.ts", "src/**/*.d.ts"]
+  "include": ["src/**/*.ts", "src/**/*.d.ts"]
 }
