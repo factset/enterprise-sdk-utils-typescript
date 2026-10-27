@@ -158,7 +158,7 @@ __metadata:
     eslint-plugin-prettier: "npm:^5.5.6"
     https-proxy-agent: "npm:^7.0.6"
     joi: "npm:^18.2.9"
-    jose: "npm:^4.15.9"
+    jose: "npm:^6.2.13"
     openid-client: "npm:^5.7.1"
     prettier: "npm:^3.9.6"
     typescript: "npm:^5.9.3"
@@ -1431,6 +1431,13 @@ __metadata:
   version: 4.15.9
   resolution: "jose@npm:4.15.9"
   checksum: 10c0/4ed4ddf4a029db04bd167f2215f65d7245e4dc5f36d7ac3c0126aab38d66309a9e692f52df88975d99429e357e5fd8bab340ff20baab544d17684dd1d940a0f4
+  languageName: node
+  linkType: hard
+
+"jose@npm:^6.2.13":
+  version: 6.2.13
+  resolution: "jose@npm:6.2.13"
+  checksum: 10c0/a7a175057fd42e129200026320d535deba5c869e764bdb130d4aecb7cc2a22c07eab2bf9fc848188b45b89d95f8e0ba4ce01a8259a4fa45c84bec34f66f2918e
   languageName: node
   linkType: hard
 
