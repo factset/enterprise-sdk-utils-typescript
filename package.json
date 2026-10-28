@@ -9,7 +9,7 @@
   "author": "FactSet Research Systems",
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "bugs": {
     "url": "https://developer.factset.com"
@@ -48,14 +48,15 @@
     "@types/node": "^22.20.1",
     "@typescript-eslint/eslint-plugin": "^8.68.0",
     "@typescript-eslint/parser": "^8.68.0",
-    "@vitest/coverage-v8": "^4.1.12",
+    "@vitest/coverage-v8": "^5.0.5",
     "concurrently": "^10.0.5",
     "eslint": "^10.9.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.6",
     "prettier": "^3.9.6",
     "typescript": "^5.9.3",
-    "vitest": "^4.1.12"
+    "vite": "^8.3.4",
+    "vitest": "^5.0.5"
   },
   "resolutions": {
     "shell-quote": "^1.11.0"
