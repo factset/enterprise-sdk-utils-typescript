@@ -9,7 +9,7 @@
   "author": "FactSet Research Systems",
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "bugs": {
     "url": "https://developer.factset.com"
