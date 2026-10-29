@@ -2,3 +2,4 @@ export const FACTSET_WELL_KNOWN_URI = 'https://auth.factset.com/.well-known/open
 export const JWT_NOT_BEFORE_SECS = 5;
 export const JWT_EXPIRE_AFTER_SECS = 300;
 export const PACKAGE_NAME = '@factset/sdk-utils';
+export const PACKAGE_VERSION = '3.0.0';

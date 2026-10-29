@@ -3,9 +3,8 @@
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
     "target": "es6",
     "module": "commonjs",
-    "rootDir": "./src",
     "declaration": true,
-    "outDir": "./lib",
+    "outDir": "./dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -13,6 +12,5 @@
     "skipLibCheck": true,
     "types": ["vitest/globals"]
   },
-  "exclude": ["lib", "__tests__"],
-  "include": ["src"]
+  "include": ["./*.ts", "__tests__/**/*.ts", "__tests__/**/*.d.ts", "src/**/*.ts", "src/**/*.d.ts"]
 }
