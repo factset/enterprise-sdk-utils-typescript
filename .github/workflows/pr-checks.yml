@@ -17,5 +17,5 @@ jobs:
     steps:
       - uses: naveenk1223/action-pr-title@v1.0.0
         with:
-          regex: '^(chore|demo|deprecate|docs|feat|fix|perf|refactor|revert|style|test)(\(.+\))?: .+$'
+          regex: '^(chore|demo|deprecate|docs|feat|fix|perf|refactor|revert|style|test)(\(.+\))?!?: .+$'
           max_length: 60
