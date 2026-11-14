@@ -184,7 +184,7 @@ __metadata:
     eslint: "npm:^10.13.0"
     eslint-config-prettier: "npm:^10.1.8"
     eslint-plugin-prettier: "npm:^5.5.7"
-    jose: "npm:^6.2.13"
+    jose: "npm:^6.2.14"
     openid-client: "npm:^6.8.8"
     prettier: "npm:^3.9.10"
     typescript: "npm:^5.9.3"
@@ -1260,10 +1260,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jose@npm:^6.2.12, jose@npm:^6.2.13":
+"jose@npm:^6.2.12":
   version: 6.2.13
   resolution: "jose@npm:6.2.13"
   checksum: 10c0/a7a175057fd42e129200026320d535deba5c869e764bdb130d4aecb7cc2a22c07eab2bf9fc848188b45b89d95f8e0ba4ce01a8259a4fa45c84bec34f66f2918e
+  languageName: node
+  linkType: hard
+
+"jose@npm:^6.2.14":
+  version: 6.2.14
+  resolution: "jose@npm:6.2.14"
+  checksum: 10c0/3db121220793e391c24803edae1ede848e7a67e2c3d37f9864f3e3e245c4b2d318f176d17f0f8ab02be07e210a3db5453612c8d5716af2deeaaa4e5d50e70641
   languageName: node
   linkType: hard
 
